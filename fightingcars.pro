@@ -10,9 +10,11 @@
 VERSION = 1.0.0
 QMAKE_TARGET_COMPANY = THEODOR SERBANA
 QMAKE_TARGET_PRODUCT = FightingCars
-QMAKE_TARGET_DESCRIPTION = Two players game application
+QMAKE_TARGET_DESCRIPTION = 2Player FightingsCars
 QMAKE_TARGET_COPYRIGHT = Copyright 2016
-#######################################
+RC_ICONS = resources/img/icon.ico
+RC_LANG = ENGLISH
+#################
 
 TEMPLATE = app
 TARGET = FightingCars
