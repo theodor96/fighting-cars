@@ -7,5 +7,9 @@
         <file>img/car_enemy.png</file>
         <file>img/extralife.png</file>
         <file>img/tombstone.png</file>
+        <file>img/about.png</file>
+        <file>img/exit.png</file>
+        <file>img/new.png</file>
+        <file>img/qt.png</file>
     </qresource>
 </RCC>
