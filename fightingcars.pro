@@ -24,6 +24,12 @@ QT += core gui network widgets
 CONFIG += static console
 ########################
 
-SOURCES += main.cpp
+FORMS += userinterface.ui
 RESOURCES += resources/resources.qrc
 ####################################
+
+
+HEADERS +=  userinterface.h
+SOURCES +=  main.cpp \
+            userinterface.cpp
+#############################
