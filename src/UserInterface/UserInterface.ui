@@ -13,7 +13,21 @@
   <property name="windowTitle">
    <string>FightingCars</string>
   </property>
-  <widget class="QWidget" name="mWidget"/>
+  <widget class="QWidget" name="mWidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>100</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>CE PLM</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="mMenuBar">
    <property name="geometry">
     <rect>
@@ -43,7 +57,7 @@
   </widget>
   <action name="mActionNew">
    <property name="icon">
-    <iconset resource="../../resources/resources.qrc">
+    <iconset resource="../../resources/Resources.qrc">
      <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
    </property>
    <property name="text">
@@ -55,7 +69,7 @@
   </action>
   <action name="mActionAbout">
    <property name="icon">
-    <iconset resource="../../resources/resources.qrc">
+    <iconset resource="../../resources/Resources.qrc">
      <normaloff>:/img/img/about.png</normaloff>:/img/img/about.png</iconset>
    </property>
    <property name="text">
@@ -64,7 +78,7 @@
   </action>
   <action name="mActionAboutQt">
    <property name="icon">
-    <iconset resource="../../resources/resources.qrc">
+    <iconset resource="../../resources/Resources.qrc">
      <normaloff>:/img/img/qt.png</normaloff>:/img/img/qt.png</iconset>
    </property>
    <property name="text">
@@ -73,7 +87,7 @@
   </action>
   <action name="mActionExit">
    <property name="icon">
-    <iconset resource="../../resources/resources.qrc">
+    <iconset resource="../../resources/Resources.qrc">
      <normaloff>:/img/img/exit.png</normaloff>:/img/img/exit.png</iconset>
    </property>
    <property name="text">
@@ -85,7 +99,7 @@
   </action>
  </widget>
  <resources>
-  <include location="../../resources/resources.qrc"/>
+  <include location="../../resources/Resources.qrc"/>
  </resources>
  <connections/>
 </ui>

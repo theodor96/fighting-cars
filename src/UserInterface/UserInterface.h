@@ -21,4 +21,4 @@ private:
     Ui::UserInterface* ui;
 };
 
-#endif // MAINWINDOW_H
+#endif // USERINTERFACE_H
