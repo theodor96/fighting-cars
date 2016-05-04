@@ -13,3 +13,5 @@ TARGET = FightingCars
 
 QT += core gui network widgets
 CONFIG += static
+
+SOURCES += main.cpp
