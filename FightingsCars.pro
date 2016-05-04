@@ -16,6 +16,11 @@ RC_ICONS = resources/img/icon.ico
 RC_LANG = ENGLISH
 #################
 
+INCLUDEPATH += $$PWD/src/UserInterface
+INCLUDEPATH += $$PWD/src/GameEngine
+INCLUDEPATH += $$PWD/src
+#########################
+
 TEMPLATE = app
 TARGET = FightingCars
 #####################
@@ -24,12 +29,13 @@ QT += core gui network widgets
 CONFIG += static console
 ########################
 
-FORMS += userinterface.ui
-RESOURCES += resources/resources.qrc
+RESOURCES +=    resources/resources.qrc
+FORMS +=        src/UserInterface/userinterface.ui
 ####################################
 
 
-HEADERS +=  userinterface.h
-SOURCES +=  main.cpp \
-            userinterface.cpp
+HEADERS +=      src/UserInterface/userinterface.h
+
+SOURCES +=      src/main.cpp \
+                src/UserInterface/userinterface.cpp
 #############################
