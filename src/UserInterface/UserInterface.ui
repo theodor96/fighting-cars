@@ -23,9 +23,69 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="mMenuGame">
+    <property name="title">
+     <string>Game</string>
+    </property>
+    <addaction name="mActionNew"/>
+    <addaction name="separator"/>
+    <addaction name="mActionExit"/>
+   </widget>
+   <widget class="QMenu" name="mMenuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="mActionAbout"/>
+    <addaction name="mActionAboutQt"/>
+   </widget>
+   <addaction name="mMenuGame"/>
+   <addaction name="mMenuAbout"/>
   </widget>
-  <widget class="QStatusBar" name="mStatusBar"/>
+  <action name="mActionNew">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="mActionAbout">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/img/img/about.png</normaloff>:/img/img/about.png</iconset>
+   </property>
+   <property name="text">
+    <string>About this game</string>
+   </property>
+  </action>
+  <action name="mActionAboutQt">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/img/img/qt.png</normaloff>:/img/img/qt.png</iconset>
+   </property>
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+  <action name="mActionExit">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/img/img/exit.png</normaloff>:/img/img/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
