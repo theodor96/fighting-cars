@@ -17,6 +17,7 @@ RC_LANG = ENGLISH
 #################
 
 INCLUDEPATH += $$PWD/src/UserInterface
+INCLUDEPATH += $$PWD/src/Common
 INCLUDEPATH += $$PWD/src/GameEngine
 INCLUDEPATH += $$PWD/src
 #########################
@@ -29,13 +30,14 @@ QT += core gui network widgets
 CONFIG += static console
 ########################
 
-RESOURCES +=    resources/resources.qrc
-FORMS +=        src/UserInterface/userinterface.ui
+RESOURCES +=    resources/Resources.qrc
+FORMS +=        src/UserInterface/UserInterface.ui
 ####################################
 
 
-HEADERS +=      src/UserInterface/userinterface.h
+HEADERS +=      src/UserInterface/UserInterface.h \
+                src/Common/Constants.h
 
 SOURCES +=      src/main.cpp \
-                src/UserInterface/userinterface.cpp
+                src/UserInterface/UserInterface.cpp
 #############################
