@@ -45,11 +45,27 @@
      <x>60</x>
      <y>115</y>
      <width>80</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
     <string>Connect</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="mStateLabel">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>165</y>
+     <width>100</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Enter IP address...</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>

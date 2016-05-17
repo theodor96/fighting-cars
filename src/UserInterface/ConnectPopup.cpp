@@ -23,6 +23,7 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
 
     this->connect(ui->mIpLineEdit, &QLineEdit::textChanged, this, [=]
     {
+
         int pos = 0;
         ui->mConnectBtn->setEnabled(validator->validate(ui->mIpLineEdit->text(), pos) == QValidator::Acceptable);
     });
