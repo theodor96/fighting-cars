@@ -16,9 +16,6 @@ RC_ICONS = resources/img/icon.ico
 RC_LANG = ENGLISH
 #################
 
-INCLUDEPATH += $$PWD/src/UserInterface
-INCLUDEPATH += $$PWD/src/Common
-INCLUDEPATH += $$PWD/src/GameEngine
 INCLUDEPATH += $$PWD/src
 #########################
 
@@ -31,13 +28,15 @@ CONFIG += static console
 ########################
 
 RESOURCES +=    resources/Resources.qrc
-FORMS +=        src/UserInterface/UserInterface.ui
+FORMS += \       
+    src/UserInterface/MainWindow.ui
 ####################################
 
 
-HEADERS +=      src/UserInterface/UserInterface.h \
-                src/Common/Constants.h
+HEADERS +=      \
+            src/Common/Constants.h \
+            src/UserInterface/MainWindow.h
 
-SOURCES +=      src/main.cpp \
-                src/UserInterface/UserInterface.cpp
-#############################
+SOURCES +=  src/Common/main.cpp \
+            src/UserInterface/MainWindow.cpp
+###################################################

@@ -5,20 +5,22 @@
 
 namespace Ui
 {
-    class UserInterface;
+    class MainWindow;
 }
 
-class UserInterface :
+class MainWindow :
         public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit UserInterface(QWidget* parent = nullptr);
-    ~UserInterface();
+    explicit MainWindow(QWidget* parent = nullptr);
+    ~MainWindow();
 
 private:
-    Ui::UserInterface* ui;
+    void connectSignalsToSlots();
+
+    Ui::MainWindow* ui;
 };
 
 #endif // USERINTERFACE_H

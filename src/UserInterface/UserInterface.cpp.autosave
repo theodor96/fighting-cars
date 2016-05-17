@@ -1,0 +1,42 @@
+#include "ui_userinterface.h"
+#include <QMessageBox>
+
+#include "UserInterface/UserInterface.h"
+#include "Common/Constants.h"
+
+UserInterface::UserInterface(QWidget* parent) :
+    QMainWindow(parent),
+    ui(new Ui::UserInterface)
+{
+    ui->setupUi(this);
+    this->setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+    this->connect(ui->mActionNew, &QAction::triggered, this, []
+    {
+        //new game
+    });
+
+    this->connect(ui->mActionExit, &QAction::triggered, this, [=]
+    {
+        if (QMessageBox::question(this, WINDOW_TITLE, STR_ASK_EXIT, QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+        {
+            this->close();
+        }
+    });
+
+    this->connect(ui->mActionAbout, &QAction::triggered, this, []
+    {
+        //about this
+    });
+
+    this->connect(ui->mActionAboutQt, &QAction::triggered, this, []
+    {
+        QApplication::aboutQt();
+    });
+}
+
+UserInterface::~UserInterface()
+{
+    delete ui;
+}
+
