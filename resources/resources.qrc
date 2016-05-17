@@ -13,5 +13,9 @@
         <file>img/tombstone.png</file>
         <file>img/game_background.png</file>
         <file>img/mainwindow_background.png</file>
+        <file>img/logo.png</file>
+        <file>img/waiting.gif</file>
+        <file>img/test.gif</file>
+        <file>img/lol.gif</file>
     </qresource>
 </RCC>

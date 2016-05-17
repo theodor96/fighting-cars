@@ -34,7 +34,6 @@ FORMS +=    src/UserInterface/MainWindow.ui \
             src/UserInterface/WaitPopup.ui \
 ####################################
 
-
 HEADERS +=  src/Common/Constants.h \
             src/UserInterface/MainWindow.h \
             src/UserInterface/AboutPopup.h \

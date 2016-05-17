@@ -14,22 +14,30 @@
    <string>FightingCars</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#mWidget
+   <string notr="true">#mWidget
 {
 	background: url(:/img/img/mainwindow_background.png);
-}</string>
+}
+
+/*QLabel
+{
+	background: white;
+}*/</string>
   </property>
   <widget class="QWidget" name="mWidget">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <widget class="QPushButton" name="mPlayBtn">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>60</y>
-      <width>241</width>
-      <height>61</height>
+      <x>50</x>
+      <y>300</y>
+      <width>200</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -37,38 +45,6 @@
     </property>
     <property name="text">
      <string>PLAY</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="mQuitBtn">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>220</y>
-      <width>241</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>QUIT</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="mAboutBtn">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>140</y>
-      <width>241</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>ABOUT</string>
     </property>
    </widget>
    <widget class="QLabel" name="mInstructionsLabel">
@@ -81,15 +57,147 @@
      </rect>
     </property>
     <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Instructiuni</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="mUsernameLabel">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>220</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
      <string notr="true">QLabel#mInstructionsLabel
 {
 	background: white;
 }</string>
     </property>
     <property name="text">
-     <string>TextLabelfeffwer
-eqwe
-eqweqw</string>
+     <string>Username</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="mUsernameLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>250</y>
+      <width>113</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maxLength">
+     <number>32</number>
+    </property>
+   </widget>
+   <widget class="QWidget" name="mLogoWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>50</y>
+      <width>250</width>
+      <height>156</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#mLogoWidget
+{
+	background: url(:/img/img/logo.png) no-repeat;
+}</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="mBtnsContainer">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>375</y>
+      <width>200</width>
+      <height>125</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#mBtnsContainer
+{
+	border: 0;
+}</string>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QPushButton" name="mAboutBtn">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>200</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>ABOUT</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="mQuitBtn">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>75</y>
+       <width>200</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>QUIT</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="mConnectBtn">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>75</x>
+      <y>375</y>
+      <width>75</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Connect</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="mHostBtn">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>375</y>
+      <width>75</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Wait</string>
     </property>
    </widget>
   </widget>

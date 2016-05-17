@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WaitPopup</class>
+ <widget class="QDialog" name="WaitPopup">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>200</width>
+    <height>200</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Waiting for enemy</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#WaitPopup
+{
+	background: white;
+}</string>
+  </property>
+  <widget class="QLabel" name="mWaitingLabelImage">
+   <property name="geometry">
+    <rect>
+     <x>36</x>
+     <y>0</y>
+     <width>128</width>
+     <height>128</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="mWaitingLabelText">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>158</y>
+     <width>100</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Waiting for enemy...</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

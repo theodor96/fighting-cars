@@ -3,15 +3,23 @@
 
 #include "UserInterface/MainWindow.h"
 #include "UserInterface/AboutPopup.h"
+#include "UserInterface/ConnectPopup.h"
+#include "UserInterface/WaitPopup.h"
 #include "Common/Constants.h"
+
+
+#include <QPropertyAnimation>
 
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    mIsPlayClicked(false)
 {
     ui->setupUi(this);
+    ui->mConnectBtn->hide();
+    ui->mHostBtn->hide();
 
     this->setFixedSize(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
     connectSignalsToSlots();
@@ -24,9 +32,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::connectSignalsToSlots()
 {
-    this->connect(ui->mPlayBtn, &QPushButton::clicked, this, []
+    this->connect(ui->mPlayBtn, &QPushButton::clicked, this, [=]
     {
-        //
+        if (mIsPlayClicked)
+        {
+            return;
+        }
+
+        mIsPlayClicked = true;
+        QPropertyAnimation* animation = new QPropertyAnimation(ui->mBtnsContainer, "geometry");
+        this->connect(animation, &QPropertyAnimation::finished, this, [=]
+        {
+            ui->mConnectBtn->show();
+            ui->mHostBtn->show();
+        });
+        auto beginPosition = ui->mBtnsContainer->geometry();
+
+        animation->setDuration(400);
+        animation->setStartValue(beginPosition);
+        animation->setEndValue(QRect(beginPosition.topLeft() + QPoint(0, 60), ui->mBtnsContainer->size()));
+        animation->start(QAbstractAnimation::DeleteWhenStopped);
+
     });
 
     this->connect(ui->mQuitBtn, &QPushButton::clicked, this, [=]
@@ -39,8 +65,23 @@ void MainWindow::connectSignalsToSlots()
 
     this->connect(ui->mAboutBtn, &QPushButton::clicked, this, [=]
     {
-        auto aboutPopup = new AboutPopup(this);
-        aboutPopup->setModal(true);
-        aboutPopup->show();
+        makePopup<AboutPopup>();
+    });
+
+    this->connect(ui->mUsernameLineEdit, &QLineEdit::textChanged, this, [=]
+    {
+        ui->mPlayBtn->setEnabled(ui->mUsernameLineEdit->text().length() >= USERNAME_MIN_CHARACTERS);
+    });
+
+    this->connect(ui->mConnectBtn, &QPushButton::clicked, this, [=]
+    {
+        makePopup<ConnectPopup>();
+    });
+
+    this->connect(ui->mHostBtn, &QPushButton::clicked, this, [=]
+    {
+        makePopup<WaitPopup>();
     });
 }
+
+

@@ -11,6 +11,7 @@
 #include <QGraphicsView>
 #include <QLabel>
 #include <QDebug>
+#include <QMovie>
 
 int main(int argc, char** argv)
 {
@@ -23,7 +24,7 @@ int main(int argc, char** argv)
 
 
 
-    const QImage background(":/img/img/background.png");
+    const QImage background(":/img/img/game_background.png");
 
     QGraphicsScene* scene = new QGraphicsScene(0, 0, background.width(), background.height());
 
@@ -40,8 +41,9 @@ int main(int argc, char** argv)
      auto ui = new MainWindow();
     ui->show();
 
-    //ui->setCentralWidget(view);
 
+
+    //ui->setCentralWidget(view);
 
     return fightingCars.exec();
 }
