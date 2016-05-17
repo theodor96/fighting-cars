@@ -2,7 +2,10 @@
 #include <QMessageBox>
 
 #include "UserInterface/MainWindow.h"
+#include "UserInterface/AboutPopup.h"
 #include "Common/Constants.h"
+
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
@@ -21,26 +24,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::connectSignalsToSlots()
 {
-//    this->connect(ui->mActionNew, &QAction::triggered, this, []
-//    {
-//        //new game
-//    });
+    this->connect(ui->mPlayBtn, &QPushButton::clicked, this, []
+    {
+        //
+    });
 
-//    this->connect(ui->mActionExit, &QAction::triggered, this, [=]
-//    {
-//        if (QMessageBox::question(this, WINDOW_TITLE, STR_ASK_EXIT, QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
-//        {
-//            this->close();
-//        }
-//    });
+    this->connect(ui->mQuitBtn, &QPushButton::clicked, this, [=]
+    {
+        if (QMessageBox::question(this, WINDOW_TITLE, STR_ASK_EXIT, QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+        {
+            this->close();
+        }
+    });
 
-//    this->connect(ui->mActionAbout, &QAction::triggered, this, []
-//    {
-//        //about this
-//    });
-
-//    this->connect(ui->mActionAboutQt, &QAction::triggered, this, []
-//    {
-//        QApplication::aboutQt();
-//    });
+    this->connect(ui->mAboutBtn, &QPushButton::clicked, this, [=]
+    {
+        auto aboutPopup = new AboutPopup(this);
+        aboutPopup->setModal(true);
+        aboutPopup->show();
+    });
 }

@@ -14,12 +14,84 @@
    <string>FightingCars</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background: url(:/img/img/mainwindow_background.png)</string>
+   <string notr="true">QWidget#mWidget
+{
+	background: url(:/img/img/mainwindow_background.png);
+}</string>
   </property>
   <widget class="QWidget" name="mWidget">
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <widget class="QPushButton" name="mPlayBtn">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>241</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>PLAY</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="mQuitBtn">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>220</y>
+      <width>241</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>QUIT</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="mAboutBtn">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>241</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>ABOUT</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="mInstructionsLabel">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>90</y>
+      <width>191</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel#mInstructionsLabel
+{
+	background: white;
+}</string>
+    </property>
+    <property name="text">
+     <string>TextLabelfeffwer
+eqwe
+eqweqw</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

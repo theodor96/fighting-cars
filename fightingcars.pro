@@ -29,14 +29,17 @@ CONFIG += static console
 
 RESOURCES +=    resources/Resources.qrc
 FORMS += \       
-    src/UserInterface/MainWindow.ui
+    src/UserInterface/MainWindow.ui \
+    src/UserInterface/AboutPopup.ui
 ####################################
 
 
 HEADERS +=      \
             src/Common/Constants.h \
-            src/UserInterface/MainWindow.h
+            src/UserInterface/MainWindow.h \
+            src/UserInterface/AboutPopup.h
 
 SOURCES +=  src/Common/main.cpp \
-            src/UserInterface/MainWindow.cpp
+            src/UserInterface/MainWindow.cpp \
+            src/UserInterface/AboutPopup.cpp
 ###################################################

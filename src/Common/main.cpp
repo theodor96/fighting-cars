@@ -40,7 +40,7 @@ int main(int argc, char** argv)
      auto ui = new MainWindow();
     ui->show();
 
-    ui->setCentralWidget(view);
+    //ui->setCentralWidget(view);
 
 
     return fightingCars.exec();
