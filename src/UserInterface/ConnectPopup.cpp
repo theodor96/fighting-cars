@@ -18,7 +18,6 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
 
     auto mainWindow = static_cast<MainWindow*>(parent);
     mainWindow->getPacketManager()->setParent(this);
-    mainWindow->getPacketManager()->setIPAddress(ui->mIpLineEdit->text());
 
     this->setFixedSize(CONNECT_POPUP_WIDTH, CONNECT_POPUP_WIDTH);
 
@@ -37,6 +36,7 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
 
     this->connect(ui->mConnectBtn, &QPushButton::clicked, this, [=]
     {
+        mainWindow->getPacketManager()->setIPAddress(ui->mIpLineEdit->text());
         mainWindow->getPacketManager()->sendConnectRequest(mainWindow->getUsername());
     });
 }
