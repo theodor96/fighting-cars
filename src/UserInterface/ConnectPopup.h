@@ -17,6 +17,9 @@ public:
     explicit ConnectPopup(QWidget* parent = nullptr);
     ~ConnectPopup();
 
+    void gotAccept();
+    void gotReject();
+
 private:
     Ui::ConnectPopup* ui;
 };

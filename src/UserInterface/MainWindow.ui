@@ -19,10 +19,10 @@
 	background: url(:/img/img/mainwindow_background.png);
 }
 
-/*QLabel
+QLabel
 {
 	background: white;
-}*/</string>
+}</string>
   </property>
   <widget class="QWidget" name="mWidget">
    <property name="enabled">

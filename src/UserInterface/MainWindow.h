@@ -8,14 +8,19 @@ namespace Ui
     class MainWindow;
 }
 
+class PacketManager;
+
 class MainWindow :
         public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget* parent = nullptr);
+    explicit MainWindow(PacketManager*);
     ~MainWindow();
+
+    PacketManager* getPacketManager() const;
+    const QString getUsername() const;
 
 private:
     void connectSignalsToSlots();
@@ -28,6 +33,7 @@ private:
     }
 
     Ui::MainWindow* ui;
+    PacketManager* mPacketManager;
     bool mIsPlayClicked;
 };
 

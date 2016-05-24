@@ -5,6 +5,7 @@
 #include "UserInterface/AboutPopup.h"
 #include "UserInterface/ConnectPopup.h"
 #include "UserInterface/WaitPopup.h"
+#include "Network/PacketManager.h"
 #include "Common/Constants.h"
 
 
@@ -12,9 +13,10 @@
 
 #include <QDebug>
 
-MainWindow::MainWindow(QWidget* parent) :
-    QMainWindow(parent),
+MainWindow::MainWindow(PacketManager* packetManager) :
+    QMainWindow(),
     ui(new Ui::MainWindow),
+    mPacketManager(packetManager),
     mIsPlayClicked(false)
 {
     ui->setupUi(this);
@@ -28,6 +30,16 @@ MainWindow::MainWindow(QWidget* parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+PacketManager* MainWindow::getPacketManager() const
+{
+    return mPacketManager;
+}
+
+const QString MainWindow::getUsername() const
+{
+    return ui->mUsernameLineEdit->text();
 }
 
 void MainWindow::connectSignalsToSlots()

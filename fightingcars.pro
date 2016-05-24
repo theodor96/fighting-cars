@@ -39,10 +39,12 @@ HEADERS +=  src/Common/Constants.h \
             src/UserInterface/AboutPopup.h \
             src/UserInterface/ConnectPopup.h \
             src/UserInterface/WaitPopup.h \
+            src/Network/PacketManager.h \
 
 SOURCES +=  src/Common/main.cpp \
             src/UserInterface/MainWindow.cpp \
             src/UserInterface/AboutPopup.cpp \
             src/UserInterface/ConnectPopup.cpp \
             src/UserInterface/WaitPopup.cpp \
+            src/Network/PacketManager.cpp \
 ###################################################

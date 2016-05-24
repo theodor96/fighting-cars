@@ -17,6 +17,8 @@ public:
     explicit WaitPopup(QWidget* parent = nullptr);
     ~WaitPopup();
 
+    void gotConnectRequest(const QString&);
+
 private:
     Ui::WaitPopup* ui;
 };

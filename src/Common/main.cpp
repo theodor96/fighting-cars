@@ -1,7 +1,7 @@
 #include <QApplication>
 
 #include "UserInterface/MainWindow.h"
-
+#include "Network/PacketManager.h"
 
 
 
@@ -36,9 +36,9 @@ int main(int argc, char** argv)
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 
+    auto packetManager = new PacketManager();
 
-
-     auto ui = new MainWindow();
+    auto ui = new MainWindow(packetManager);
     ui->show();
 
 
