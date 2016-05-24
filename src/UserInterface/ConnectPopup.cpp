@@ -38,27 +38,29 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
     {
         mainWindow->getPacketManager()->setIPAddress(ui->mIpLineEdit->text());
         mainWindow->getPacketManager()->sendConnectRequest(mainWindow->getUsername());
+        ui->mStateLabel->setText(STR_CONNECTING);
     });
 }
 
 ConnectPopup::~ConnectPopup()
 {
     delete ui;
+    static_cast<MainWindow*>(this->parent())->getPacketManager()->setParent(nullptr);
 }
 
-void ConnectPopup::gotAccept()
+void ConnectPopup::gotAccept(const QString& enemyUsername)
 {
-
+    static_cast<MainWindow*>(this->parent())->getPacketManager()->sendAck();
+    //porneste jocul
+    this->close();
 }
 
 void ConnectPopup::gotReject()
 {
-
+    ui->mStateLabel->setText(STR_RESP_DECLINED);
 }
 
 void ConnectPopup::closeEvent(QCloseEvent*)
 {
-    static_cast<MainWindow*>(this->parent())->getPacketManager()->sendCancelRequest();
+    delete this;
 }
-
-

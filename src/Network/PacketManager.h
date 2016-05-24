@@ -21,8 +21,9 @@ public:
     void setIPAddress(const QString&);
 
     void sendConnectRequest(const QString&);
-
-    void sendCancelRequest();
+    void sendAccept(const QString&);
+    void sendReject();
+    void sendAck();
 
 private:
     QString mIPAddress;

@@ -2,6 +2,7 @@
 
 #include "PacketManager.h"
 #include "UserInterface/WaitPopup.h"
+#include "UserInterface/ConnectPopup.h"
 #include "Common/Constants.h"
 
 PacketManager::PacketManager() :
@@ -45,16 +46,41 @@ void PacketManager::sendConnectRequest(const QString& username)
     qDebug() << "sent datagram 1 1 " << username << " to ip " << mIPAddress << "on port " << PEER_PORT;
 }
 
-void PacketManager::sendCancelRequest()
+void PacketManager::sendAccept(const QString& username)
 {
     QByteArray datagram;
     QDataStream out(&datagram, QIODevice::WriteOnly);
 
     out << MESSAGE_TYPE_CONNECTION;
-    out << MESSAGE_TYPE_CONNECTION_CANCEL;
+    out << MESSAGE_TYPE_CONNECTION_ACCEPT;
+    out << username;
 
     mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
-    qDebug() << "sent cancel req";
+    qDebug() << "sent accept";
+}
+
+void PacketManager::sendReject()
+{
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+
+    out << MESSAGE_TYPE_CONNECTION;
+    out << MESSAGE_TYPE_CONNECTION_REJECT;
+
+    mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
+    qDebug() << "sent reject";
+}
+
+void PacketManager::sendAck()
+{
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+
+    out << MESSAGE_TYPE_CONNECTION;
+    out << MESSAGE_TYPE_CONNECTION_ACK;
+
+    mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
+    qDebug() << "sent ack";
 }
 
 void PacketManager::receivedDatagram()
@@ -95,10 +121,14 @@ void PacketManager::receivedDatagram()
                     break;
                 }
 
-                case MESSAGE_TYPE_CONNECTION_CANCEL:
+                case MESSAGE_TYPE_CONNECTION_ACCEPT:
                 {
-                    auto waitPopup = static_cast<WaitPopup*>(mParent);
-                    waitPopup->gotCancelRequest();
+                    QString enemyUsername;
+                    in >> enemyUsername;
+
+                    auto waitPopup = static_cast<ConnectPopup*>(mParent);
+                    waitPopup->gotAccept(enemyUsername);
+
                     break;
                 }
             }

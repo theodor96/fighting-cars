@@ -22,9 +22,9 @@ public:
     ~WaitPopup();
 
     void gotConnectRequest(const QString&);
+    void gotAckConfirmation();
 
     void closeEvent(QCloseEvent*) override;
-    void gotCancelRequest();
 
 private:
     Ui::WaitPopup* ui;

@@ -34,30 +34,28 @@ WaitPopup::~WaitPopup()
     delete ui;
     delete mMovie;
     static_cast<MainWindow*>(this->parent())->getPacketManager()->setParent(nullptr);
-    qDebug() << "setted parent to null";
 }
 
 void WaitPopup::gotConnectRequest(const QString& enemyUsername)
 {
-    mMsgBox->setText(QString(STR_ASK_PLAY) + enemyUsername + "?");
-    mMsgBox->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-
-    if (mMsgBox->exec() == QMessageBox::Yes)
+    if (QMessageBox::question(this, WINDOW_TITLE, QString(STR_ASK_PLAY) + enemyUsername + "?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
     {
-        qDebug() << "game should start naw";
+        auto mainWindow = static_cast<MainWindow*>(this->parent());
+        mainWindow->getPacketManager()->sendAccept(mainWindow->getUsername());
     }
     else
     {
-        qDebug() << "declined req";
+        static_cast<MainWindow*>(this->parent())->getPacketManager()->sendReject();
     }
+}
+
+void WaitPopup::gotAckConfirmation()
+{
+    //porneste jocul
+    this->close();
 }
 
 void WaitPopup::closeEvent(QCloseEvent*)
 {
     delete this;
-}
-
-void WaitPopup::gotCancelRequest()
-{
-    mMsgBox->button(QMessageBox::Yes)->setEnabled(false);
 }
