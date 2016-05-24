@@ -92,6 +92,7 @@ void MainWindow::connectSignalsToSlots()
 
     this->connect(ui->mHostBtn, &QPushButton::clicked, this, [=]
     {
+        qDebug() << "making wait popup";
         makePopup<WaitPopup>();
     });
 }

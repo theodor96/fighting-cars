@@ -22,6 +22,8 @@ public:
 
     void sendConnectRequest(const QString&);
 
+    void sendCancelRequest();
+
 private:
     QString mIPAddress;
     QObject* mParent;

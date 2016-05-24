@@ -1,5 +1,6 @@
 #include "ui_WaitPopup.h"
 #include <QMessageBox>
+#include <QAbstractButton>
 
 #include "UserInterface/WaitPopup.h"
 #include "UserInterface/MainWindow.h"
@@ -13,8 +14,11 @@
 WaitPopup::WaitPopup(QWidget* parent) :
     QDialog(parent),
     ui(new Ui::WaitPopup),
-    mMovie(new QMovie(":/img/img/lol.gif"))
+    mMovie(new QMovie(":/img/img/lol.gif")),
+    mMsgBox(new QMessageBox(this))
 {
+    qDebug() << "constructing wait popup";
+
     ui->setupUi(this);
 
     this->setFixedSize(WAIT_POPUP_WIDTH, WAIT_POPUP_HEIGHT);
@@ -29,18 +33,31 @@ WaitPopup::~WaitPopup()
 {
     delete ui;
     delete mMovie;
+    static_cast<MainWindow*>(this->parent())->getPacketManager()->setParent(nullptr);
+    qDebug() << "setted parent to null";
 }
 
 void WaitPopup::gotConnectRequest(const QString& enemyUsername)
 {
-    if (QMessageBox::question(this, WINDOW_TITLE, QString(STR_ASK_PLAY) + enemyUsername + "?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+    mMsgBox->setText(QString(STR_ASK_PLAY) + enemyUsername + "?");
+    mMsgBox->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+
+    if (mMsgBox->exec() == QMessageBox::Yes)
     {
-        //send to enemy 1 2
         qDebug() << "game should start naw";
-        delete this;
     }
     else
     {
-        //send to enemy 1 3
+        qDebug() << "declined req";
     }
+}
+
+void WaitPopup::closeEvent(QCloseEvent*)
+{
+    delete this;
+}
+
+void WaitPopup::gotCancelRequest()
+{
+    mMsgBox->button(QMessageBox::Yes)->setEnabled(false);
 }

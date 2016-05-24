@@ -8,6 +8,8 @@ namespace Ui
     class ConnectPopup;
 }
 
+class QCloseEvent;
+
 class ConnectPopup :
         public QDialog
 {
@@ -19,6 +21,8 @@ public:
 
     void gotAccept();
     void gotReject();
+
+    void closeEvent(QCloseEvent*) override;
 
 private:
     Ui::ConnectPopup* ui;

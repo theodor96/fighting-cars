@@ -27,6 +27,7 @@ private:
     template <typename PopupType>
     void makePopup()
     {
+        qDebug() << "constructing a popup";
         auto popup = new PopupType(this);
         popup->setModal(true);
         popup->show();

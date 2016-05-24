@@ -9,6 +9,8 @@ namespace Ui
 }
 
 class QMovie;
+class QCloseEvent;
+class QMessageBox;
 
 class WaitPopup :
         public QDialog
@@ -21,9 +23,13 @@ public:
 
     void gotConnectRequest(const QString&);
 
+    void closeEvent(QCloseEvent*) override;
+    void gotCancelRequest();
+
 private:
     Ui::WaitPopup* ui;
     QMovie* mMovie;
+    QMessageBox* mMsgBox;
 };
 
 #endif // WAITPOPUP_H
