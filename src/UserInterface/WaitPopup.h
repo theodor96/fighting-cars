@@ -8,6 +8,8 @@ namespace Ui
     class WaitPopup;
 }
 
+class QMovie;
+
 class WaitPopup :
         public QDialog
 {
@@ -21,6 +23,7 @@ public:
 
 private:
     Ui::WaitPopup* ui;
+    QMovie* mMovie;
 };
 
 #endif // WAITPOPUP_H
