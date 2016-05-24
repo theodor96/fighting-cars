@@ -59,6 +59,7 @@ void ConnectPopup::gotAccept(const QString& enemyUsername)
 
 void ConnectPopup::gotReject()
 {
+    qDebug() << "i am connect and i got rejected";
     ui->mStateLabel->setText(STR_RESP_DECLINED);
 }
 

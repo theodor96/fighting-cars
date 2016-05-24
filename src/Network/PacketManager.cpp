@@ -139,6 +139,7 @@ void PacketManager::receivedDatagram()
                 {
                     qDebug() << "got message tpye reject";
                     auto connectPopup = static_cast<ConnectPopup*>(mParent);
+                    qDebug () << mParent << connectPopup;
                     connectPopup->gotReject();
                 }
 
