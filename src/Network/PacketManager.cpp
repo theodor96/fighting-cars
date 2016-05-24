@@ -46,6 +46,18 @@ void PacketManager::sendConnectRequest(const QString& username)
     qDebug() << "sent datagram 1 1 " << username << " to ip " << mIPAddress << "on port " << PEER_PORT;
 }
 
+void PacketManager::sendReceived()
+{
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+
+    out << MESSAGE_TYPE_CONNECTION;
+    out << MESSAGE_TYPE_CONNECTION_RECEIVED;
+
+    mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
+    qDebug() << "sent received ";
+}
+
 void PacketManager::sendAccept(const QString& username)
 {
     QByteArray datagram;
@@ -120,6 +132,14 @@ void PacketManager::receivedDatagram()
 
                     auto waitPopup = static_cast<WaitPopup*>(mParent);
                     waitPopup->gotConnectRequest(enemyUsername);
+
+                    break;
+                }
+
+                case MESSAGE_TYPE_CONNECTION_RECEIVED:
+                {
+                    auto connectPopup = static_cast<ConnectPopup*>(mParent);
+                    connectPopup->gotReceived();
 
                     break;
                 }

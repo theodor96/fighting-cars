@@ -21,6 +21,7 @@ public:
     void setIPAddress(const QString&);
 
     void sendConnectRequest(const QString&);
+    void sendReceived();
     void sendAccept(const QString&);
     void sendReject();
     void sendAck();

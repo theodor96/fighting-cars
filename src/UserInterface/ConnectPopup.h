@@ -19,6 +19,7 @@ public:
     explicit ConnectPopup(QWidget* parent = nullptr);
     ~ConnectPopup();
 
+    void gotReceived();
     void gotAccept(const QString&);
     void gotReject();
 

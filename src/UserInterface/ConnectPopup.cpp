@@ -38,8 +38,9 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
     {
         mainWindow->getPacketManager()->setIPAddress(ui->mIpLineEdit->text());
         mainWindow->getPacketManager()->sendConnectRequest(mainWindow->getUsername());
-        ui->mStateLabel->setText(STR_CONNECTING);
+        ui->mStateLabel->setText(STR_RESP_CONNECTING);
         ui->mConnectBtn->setEnabled(false);
+        ui->mIpLineEdit->setEnabled(false);
     });
 }
 
@@ -47,6 +48,11 @@ ConnectPopup::~ConnectPopup()
 {
     delete ui;
     static_cast<MainWindow*>(this->parent())->getPacketManager()->setParent(nullptr);
+}
+
+void ConnectPopup::gotReceived()
+{
+    ui->mStateLabel->setText(STR_RESP_WAITING);
 }
 
 void ConnectPopup::gotAccept(const QString& enemyUsername)
