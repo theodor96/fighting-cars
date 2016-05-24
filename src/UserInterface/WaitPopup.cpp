@@ -52,7 +52,7 @@ void WaitPopup::gotConnectRequest(const QString& enemyUsername)
 void WaitPopup::gotAckConfirmation()
 {
     //porneste jocul
-    qDebug() << "start game";
+    qDebug() << "start game-wait";
     this->close();
 }
 

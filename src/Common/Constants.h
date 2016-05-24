@@ -24,6 +24,6 @@ const char* const WINDOW_TITLE = "FightingCars";
 const char* const STR_ASK_EXIT = "Are you sure you want to exit the game?";
 const char* const STR_ASK_PLAY = "Do you want to play versus ";
 const char* const STR_RESP_DECLINED = "Enemy rejected your invitation";
-const char* const STR_CONNECTING = "Waiting for enemy response...";
+const char* const STR_CONNECTING = "Waiting for enemy...";
 
 #endif // CONSTANTS_H

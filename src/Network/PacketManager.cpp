@@ -68,7 +68,7 @@ void PacketManager::sendReject()
     out << MESSAGE_TYPE_CONNECTION_REJECT;
 
     mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
-    qDebug() << "sent reject";
+    qDebug() << "sent reject to " << mIPAddress;
 }
 
 void PacketManager::sendAck()
@@ -137,6 +137,7 @@ void PacketManager::receivedDatagram()
 
                 case MESSAGE_TYPE_CONNECTION_REJECT:
                 {
+                    qDebug() << "got message tpye reject";
                     auto connectPopup = static_cast<ConnectPopup*>(mParent);
                     connectPopup->gotReject();
                 }

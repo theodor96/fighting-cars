@@ -39,6 +39,7 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
         mainWindow->getPacketManager()->setIPAddress(ui->mIpLineEdit->text());
         mainWindow->getPacketManager()->sendConnectRequest(mainWindow->getUsername());
         ui->mStateLabel->setText(STR_CONNECTING);
+        ui->mConnectBtn->setEnabled(false);
     });
 }
 
@@ -52,7 +53,7 @@ void ConnectPopup::gotAccept(const QString& enemyUsername)
 {
     static_cast<MainWindow*>(this->parent())->getPacketManager()->sendAck();
     //porneste jocul
-    qDebug() << "start game";
+    qDebug() << "start game-connect";
     this->close();
 }
 
