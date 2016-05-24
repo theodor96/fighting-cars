@@ -12,15 +12,15 @@
 
 WaitPopup::WaitPopup(QWidget* parent) :
     QDialog(parent),
-    ui(new Ui::WaitPopup)
+    ui(new Ui::WaitPopup),
+    mMovie(new QMovie(":/img/img/lol.gif"))
 {
     ui->setupUi(this);
 
     this->setFixedSize(WAIT_POPUP_WIDTH, WAIT_POPUP_HEIGHT);
 
-    QMovie* movie = new QMovie(":/img/img/lol.gif");
-    ui->mWaitingLabelImage->setMovie(movie);
-    movie->start();
+    ui->mWaitingLabelImage->setMovie(mMovie);
+    mMovie->start();
 
     static_cast<MainWindow*>(parent)->getPacketManager()->setParent(this);
 }
@@ -28,6 +28,7 @@ WaitPopup::WaitPopup(QWidget* parent) :
 WaitPopup::~WaitPopup()
 {
     delete ui;
+    delete mMovie;
 }
 
 void WaitPopup::gotConnectRequest(const QString& enemyUsername)
@@ -36,6 +37,7 @@ void WaitPopup::gotConnectRequest(const QString& enemyUsername)
     {
         //send to enemy 1 2
         qDebug() << "game should start naw";
+        delete this;
     }
     else
     {
