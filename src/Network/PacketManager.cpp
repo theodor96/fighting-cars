@@ -141,12 +141,16 @@ void PacketManager::receivedDatagram()
                     auto connectPopup = static_cast<ConnectPopup*>(mParent);
                     qDebug () << mParent << connectPopup;
                     connectPopup->gotReject();
+
+                    break;
                 }
 
                 case MESSAGE_TYPE_CONNECTION_ACK:
                 {
                     auto waitPopup = static_cast<WaitPopup*>(mParent);
                     waitPopup->gotAckConfirmation();
+
+                    break;
                 }
             }
         }
