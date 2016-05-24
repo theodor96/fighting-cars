@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QMovie>
 #include <QLabel>
+#include <QTimer>
 
 WaitPopup::WaitPopup(QWidget* parent) :
     QDialog(parent),
@@ -44,7 +45,12 @@ void WaitPopup::gotConnectRequest(const QString& enemyUsername)
     if (QMessageBox::question(this, WINDOW_TITLE, QString(STR_ASK_PLAY) + enemyUsername + "?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
     {
         mainWindow->getPacketManager()->sendAccept(mainWindow->getUsername());
-        ui->mWaitingLabelText->setText(STR_RESP_DECLINED);
+        QTimer* timer = new QTimer(this);
+        timer->singleShot(1000, this, [=]
+        {
+            ui->mWaitingLabelText->setText(STR_RESP_DECLINED);
+            delete timer;
+        });
     }
     else
     {
