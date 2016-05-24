@@ -56,7 +56,7 @@ void PacketManager::sendAccept(const QString& username)
     out << username;
 
     mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
-    qDebug() << "sent accept";
+    qDebug() << "sent accept to " << mIPAddress;
 }
 
 void PacketManager::sendReject()
@@ -85,11 +85,12 @@ void PacketManager::sendAck()
 
 void PacketManager::receivedDatagram()
 {
+    QHostAddress peerIPAddress;
     QByteArray datagram;
     while (mSocket->hasPendingDatagrams())
     {
         datagram.resize(mSocket->pendingDatagramSize());
-        mSocket->readDatagram(datagram.data(), datagram.size());
+        mSocket->readDatagram(datagram.data(), datagram.size(), &peerIPAddress);
     }
 
     if (mParent == nullptr)
@@ -115,6 +116,8 @@ void PacketManager::receivedDatagram()
                     QString enemyUsername;
                     in >> enemyUsername;
 
+                    mIPAddress = peerIPAddress.toString();
+
                     auto waitPopup = static_cast<WaitPopup*>(mParent);
                     waitPopup->gotConnectRequest(enemyUsername);
 
@@ -126,10 +129,22 @@ void PacketManager::receivedDatagram()
                     QString enemyUsername;
                     in >> enemyUsername;
 
-                    auto waitPopup = static_cast<ConnectPopup*>(mParent);
-                    waitPopup->gotAccept(enemyUsername);
+                    auto connectPopup = static_cast<ConnectPopup*>(mParent);
+                    connectPopup->gotAccept(enemyUsername);
 
                     break;
+                }
+
+                case MESSAGE_TYPE_CONNECTION_REJECT:
+                {
+                    auto connectPopup = static_cast<ConnectPopup*>(mParent);
+                    connectPopup->gotReject();
+                }
+
+                case MESSAGE_TYPE_CONNECTION_ACK:
+                {
+                    auto waitPopup = static_cast<WaitPopup*>(mParent);
+                    waitPopup->gotAckConfirmation();
                 }
             }
         }
