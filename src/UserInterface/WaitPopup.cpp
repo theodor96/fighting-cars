@@ -42,6 +42,7 @@ void WaitPopup::gotConnectRequest(const QString& enemyUsername)
     {
         auto mainWindow = static_cast<MainWindow*>(this->parent());
         mainWindow->getPacketManager()->sendAccept(mainWindow->getUsername());
+        ui->mWaitingLabelText->setText(STR_RESP_DECLINED);
     }
     else
     {
