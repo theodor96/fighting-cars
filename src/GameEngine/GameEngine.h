@@ -20,7 +20,7 @@ public:
 
     MainWindow* getParent() const;
     void gotKeyPressed(Qt::Key);
-    void gotKeyReleased(Qt::Key);
+    void gotKeyReleased(Qt::Key, const QPointF&);
 
     void add(QGraphicsItem*);
 

@@ -27,7 +27,7 @@ public:
     void sendAck();
 
     void sendKeyPressed(Qt::Key);
-    void sendKeyReleased(Qt::Key);
+    void sendKeyReleased(Qt::Key, const QPointF&);
 
 private:
     QString mIPAddress;

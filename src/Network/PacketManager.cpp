@@ -109,13 +109,15 @@ void PacketManager::sendKeyPressed(Qt::Key key)
 
 }
 
-void PacketManager::sendKeyReleased(Qt::Key key)
+void PacketManager::sendKeyReleased(Qt::Key key, const QPointF& myPosition)
 {
     QByteArray datagram;
     QDataStream out(&datagram, QIODevice::WriteOnly);
 
     out << MESSAGE_TYPE_KEY_RELEASE;
     out << static_cast<qint64>(key);
+    out << myPosition.x();
+    out << myPosition.y();
 
     qDebug() << "sending " << MESSAGE_TYPE_KEY_RELEASE << " " << static_cast<qint64>(key) << " to " << mIPAddress;
     mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
@@ -219,10 +221,15 @@ void PacketManager::receivedDatagram()
         {
             qDebug() << "got key release";
             qint64 key;
+            qreal peerX;
+            qreal peerY;
+
             in >> key;
+            in >> peerX;
+            in >> peerY;
 
             auto gameEngine = static_cast<GameEngine*>(mParent);
-            gameEngine->gotKeyReleased(static_cast<Qt::Key>(key));
+            gameEngine->gotKeyReleased(static_cast<Qt::Key>(key), QPointF(peerX, peerY));
 
             break;
         }

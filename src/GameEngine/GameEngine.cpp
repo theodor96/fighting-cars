@@ -56,8 +56,9 @@ void GameEngine::gotKeyPressed(Qt::Key key)
     player->keyPressEvent(&QKeyEvent(QKeyEvent::KeyPress, key, Qt::NoModifier));
 }
 
-void GameEngine::gotKeyReleased(Qt::Key key)
+void GameEngine::gotKeyReleased(Qt::Key key, const QPointF& peerPosition)
 {
     auto player = mIsHost ? mPlayerEnemy : mPlayerMe;
     player->keyReleaseEvent(&QKeyEvent(QKeyEvent::KeyRelease, key, Qt::NoModifier));
+    player->setPos(peerPosition);
 }

@@ -146,7 +146,7 @@ void Player::keyReleaseEvent(QKeyEvent* event)
 
     if (!mIsEnemy)
     {
-       mGameEngine->getParent()->getPacketManager()->sendKeyReleased(static_cast<Qt::Key>(event->key()));
+       mGameEngine->getParent()->getPacketManager()->sendKeyReleased(static_cast<Qt::Key>(event->key()), pos());
     }
 
     mPressedKeys.remove(mPressedKeys.indexOf(static_cast<Qt::Key>(event->key())));

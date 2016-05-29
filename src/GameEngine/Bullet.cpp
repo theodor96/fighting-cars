@@ -1,5 +1,6 @@
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QDebug>
 
 #include "GameEngine/Bullet.h"
 #include "Common/Constants.h"
@@ -26,6 +27,7 @@ Bullet::~Bullet()
     scene()->removeItem(this);
     mTimer->stop();
     delete mTimer;
+    qDebug() << "a bullet got deleted";
 }
 
 void Bullet::move()
@@ -41,11 +43,18 @@ void Bullet::move()
 
     }
 
+    if (y() < PLAYER_ME_START_Y || y() > PLAYER_ENEMY_START_Y || x() < PLAYER_ME_START_X || x() > PLAYER_ENEMY_START_X)
+    {
+        delete this;
+        return;
+    }
+
     switch (mDirection)
     {
         case Qt::Key_Up:
         {
             setY(y() - BULLET_STEP);
+
             break;
         }
 
