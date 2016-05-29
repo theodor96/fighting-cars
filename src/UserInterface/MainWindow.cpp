@@ -7,6 +7,7 @@
 #include "UserInterface/WaitPopup.h"
 #include "Network/PacketManager.h"
 #include "Common/Constants.h"
+#include "GameEngine/GameEngine.h"
 
 
 #include <QPropertyAnimation>
@@ -40,6 +41,11 @@ PacketManager* MainWindow::getPacketManager() const
 const QString MainWindow::getUsername() const
 {
     return ui->mUsernameLineEdit->text();
+}
+
+void MainWindow::startGame()
+{
+    auto gameEngine = new GameEngine(this);
 }
 
 void MainWindow::connectSignalsToSlots()

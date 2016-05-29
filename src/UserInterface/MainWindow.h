@@ -22,6 +22,8 @@ public:
     PacketManager* getPacketManager() const;
     const QString getUsername() const;
 
+    void startGame();
+
 private:
     void connectSignalsToSlots();
     template <typename PopupType>
