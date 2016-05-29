@@ -18,7 +18,8 @@ MainWindow::MainWindow(PacketManager* packetManager) :
     QMainWindow(),
     ui(new Ui::MainWindow),
     mPacketManager(packetManager),
-    mIsPlayClicked(false)
+    mIsPlayClicked(false),
+    mEnemyUsername()
 {
     ui->setupUi(this);
     ui->mConnectBtn->hide();
@@ -31,6 +32,16 @@ MainWindow::MainWindow(PacketManager* packetManager) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::setEnemyUsername(const QString& enemyUsername)
+{
+    mEnemyUsername = enemyUsername;
+}
+
+const QString MainWindow::getEnemyUsername() const
+{
+    return mEnemyUsername;
 }
 
 PacketManager* MainWindow::getPacketManager() const

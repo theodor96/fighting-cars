@@ -11,5 +11,11 @@ int main(int argc, char** argv)
     auto ui = new MainWindow(packetManager);
     ui->show();
 
+
+
+    ui->startGame();
+
+
+
     return fightingCars.exec();
 }

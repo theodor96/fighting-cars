@@ -4,6 +4,9 @@
 #include <QObject>
 
 class MainWindow;
+class QGraphicsScene;
+class QGraphicsView;
+class Player;
 
 class GameEngine :
         public QObject
@@ -16,6 +19,10 @@ public:
 
 private:
     MainWindow* mParent;
+    QGraphicsScene* mScene;
+    QGraphicsView* mView;
+    Player* mPlayerMe;
+    Player* mPlayerEnemy;
 };
 
 #endif // GAMEENGINE_H

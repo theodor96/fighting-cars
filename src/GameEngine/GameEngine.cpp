@@ -1,5 +1,7 @@
 #include "GameEngine/GameEngine.h"
 #include "UserInterface/MainWindow.h"
+#include "Common/Constants.h"
+#include "GameEngine/Player.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -7,21 +9,25 @@
 
 GameEngine::GameEngine(MainWindow* parent) :
     QObject(parent),
-    mParent(parent)
+    mParent(parent),
+    mScene(new QGraphicsScene(0, 0, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT, this)),
+    mView(new QGraphicsView(mScene)),
+    mPlayerMe(new Player(this, false)),
+    mPlayerEnemy(new Player(this, true))
 {
-    qDebug() << "game engine ctor";
-
     const QImage background(":/img/img/game_background.png");
+    mScene->setBackgroundBrush(QBrush(background));
 
-    QGraphicsScene* scene = new QGraphicsScene(0, 0, background.width(), background.height());
+    mView->setFixedSize(background.size());
+    mView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    mView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    parent->setCentralWidget(mView);
 
-    QGraphicsView* view = new QGraphicsView(scene);
+    mPlayerMe->setUsername(mParent->getUsername());
+    mPlayerEnemy->setUsername(mParent->getEnemyUsername());
 
-    scene->setBackgroundBrush(QBrush(background));
-    view->setFixedSize(background.size());
-    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    parent->setCentralWidget(view);
+    mScene->addItem(mPlayerMe);
+    mScene->addItem(mPlayerEnemy);
 }
 
 GameEngine::~GameEngine()

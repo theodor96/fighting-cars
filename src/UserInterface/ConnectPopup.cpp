@@ -59,6 +59,7 @@ void ConnectPopup::gotAccept(const QString& enemyUsername)
 {
     MainWindow* mainWindow = static_cast<MainWindow*>(this->parent());
     mainWindow->getPacketManager()->sendAck();
+    mainWindow->setEnemyUsername(enemyUsername);
     mainWindow->startGame();
     qDebug() << "start game-connect";
     this->close();

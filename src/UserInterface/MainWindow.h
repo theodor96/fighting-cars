@@ -19,6 +19,9 @@ public:
     explicit MainWindow(PacketManager*);
     ~MainWindow();
 
+    void setEnemyUsername(const QString&);
+    const QString getEnemyUsername() const;
+
     PacketManager* getPacketManager() const;
     const QString getUsername() const;
 
@@ -38,6 +41,7 @@ private:
     Ui::MainWindow* ui;
     PacketManager* mPacketManager;
     bool mIsPlayClicked;
+    QString mEnemyUsername;
 };
 
 #endif // USERINTERFACE_H
