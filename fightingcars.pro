@@ -42,6 +42,7 @@ HEADERS +=  src/Common/Constants.h \
             src/Network/PacketManager.h \
             src/GameEngine/GameEngine.h \
             src/GameEngine/Player.h \
+            src/GameEngine/Bullet.h \
 
 SOURCES +=  src/Common/main.cpp \
             src/UserInterface/MainWindow.cpp \
@@ -51,4 +52,5 @@ SOURCES +=  src/Common/main.cpp \
             src/Network/PacketManager.cpp \
             src/GameEngine/GameEngine.cpp \
             src/GameEngine/Player.cpp \
+            src/GameEngine/Bullet.cpp \
 ###################################################

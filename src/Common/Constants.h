@@ -24,7 +24,8 @@ const quint16 PLAYER_ME_START_Y = 70;
 const quint16 PLAYER_ENEMY_START_X = 540;
 const quint16 PLAYER_ENEMY_START_Y = 540;
 const quint16 PLAYER_DEFAULT_STEP = 5;
-const quint16 PLAYER_MOVE_UPDATE_TIME = 30;
+const quint16 BULLET_STEP = 10;
+const quint16 GAME_UPDATE_TIME = 30;
 
 const quint32 PEER_PORT = 49000;
 

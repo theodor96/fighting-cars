@@ -139,10 +139,7 @@ void PacketManager::receivedDatagram()
     QDataStream in(&datagram, QIODevice::ReadOnly);
     quint8 messageType;
 
-
-
     in >> messageType;
-    qDebug() << "got a datagram! msgtpye = " << messageType;
     switch (messageType)
     {
         case MESSAGE_TYPE_CONNECTION:
@@ -228,11 +225,6 @@ void PacketManager::receivedDatagram()
             gameEngine->gotKeyReleased(static_cast<Qt::Key>(key));
 
             break;
-        }
-
-        default:
-        {
-            qDebug() << "a intrat pe default";
         }
     }
 

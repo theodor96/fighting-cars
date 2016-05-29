@@ -24,6 +24,8 @@ public:
     void keyPressEvent(QKeyEvent*) override;
     void keyReleaseEvent(QKeyEvent*) override;
 
+    void gotShot();
+
 private:
 	GameEngine* mGameEngine;
     QString mUsername;
@@ -31,9 +33,11 @@ private:
     QTimer* mMovingTimer;
     quint16 mStep;
     QStack<Qt::Key> mPressedKeys;
+    Qt::Key mOrientation;
 
     bool isEventAllowed(QKeyEvent*);
     void move();
+    void shootBullet();
 };
 
 #endif // PLAYER_H

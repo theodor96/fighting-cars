@@ -30,13 +30,18 @@ GameEngine::GameEngine(MainWindow* parent, bool mIsHost) :
     mPlayerMe->setUsername(mParent->getUsername());
     mPlayerEnemy->setUsername(mParent->getEnemyUsername());
 
-    mScene->addItem(mPlayerMe);
-    mScene->addItem(mPlayerEnemy);
+    add(mPlayerMe);
+    add(mPlayerEnemy);
 }
 
 GameEngine::~GameEngine()
 {
 
+}
+
+void GameEngine::add(QGraphicsItem* item)
+{
+    mScene->addItem(item);
 }
 
 MainWindow* GameEngine::getParent() const

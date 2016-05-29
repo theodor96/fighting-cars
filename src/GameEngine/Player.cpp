@@ -3,9 +3,11 @@
 #include "Common/Constants.h"
 #include "UserInterface/MainWindow.h"
 #include "Network/PacketManager.h"
+#include "GameEngine/Bullet.h"
 
 #include <QKeyEvent>
 #include <QDebug>
+#include <QGraphicsScene>
 #include <QVector>
 #include <QTimer>
 
@@ -16,7 +18,8 @@ Player::Player(GameEngine* parent, bool isEnemy, bool isHost) :
     mIsEnemy(isEnemy == isHost),
     mMovingTimer(new QTimer()),
     mStep(PLAYER_DEFAULT_STEP),
-    mPressedKeys()
+    mPressedKeys(),
+    mOrientation(mIsEnemy ? Qt::Key_Left : Qt::Key_Right)
 {
     setTransformOriginPoint(15, 30);
     QObject::connect(mMovingTimer, &QTimer::timeout, [=]
@@ -69,6 +72,35 @@ void Player::focusOutEvent(QFocusEvent*)
     }
 }
 
+void Player::shootBullet()
+{
+    QPointF position = pos();
+
+    switch (mOrientation)
+    {
+        case Qt::Key_Up:
+            position.ry() -= 30;
+            break;
+
+        case Qt::Key_Down:
+            position.ry() += 65;
+            break;
+
+        case Qt::Key_Right:
+            position.ry() += 18;
+            position.rx() += 50;
+            break;
+
+        case Qt::Key_Left:
+            position.ry() += 18;
+            position.rx() -= 50;
+            break;
+    }
+
+    Bullet* bullet = new Bullet(mOrientation, position, mIsEnemy);
+    scene()->addItem(bullet);
+}
+
 bool Player::isEventAllowed(QKeyEvent* event)
 {
     if (event->isAutoRepeat())
@@ -83,7 +115,7 @@ void Player::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Space)
     {
-        qDebug() << "shooot";
+        shootBullet();
         return;
     }
 
@@ -96,15 +128,11 @@ void Player::keyPressEvent(QKeyEvent* event)
     {
        mGameEngine->getParent()->getPacketManager()->sendKeyPressed(static_cast<Qt::Key>(event->key()));
     }
-    else
-    {
-        qDebug() << "as trimite pachete da is enemy si nu pot";
-    }
 
-    mPressedKeys.push(static_cast<Qt::Key>(event->key()));
+    mPressedKeys.push(mOrientation = static_cast<Qt::Key>(event->key()));
     if (!mMovingTimer->isActive())
     {
-        mMovingTimer->start(PLAYER_MOVE_UPDATE_TIME);
+        mMovingTimer->start(GAME_UPDATE_TIME);
     }
 }
 
@@ -125,10 +153,24 @@ void Player::keyReleaseEvent(QKeyEvent* event)
     {
         mMovingTimer->stop();
     }
+    else
+    {
+        mOrientation = mPressedKeys.top();
+    }
 }
 
 void Player::move()
 {
+    for (auto& item : this->collidingItems())
+    {
+        //bonus collection
+    }
+
+    if (mPressedKeys.isEmpty())
+    {
+        return;
+    }
+
     switch (mPressedKeys.top())
     {
         case Qt::Key_Left:
@@ -171,4 +213,9 @@ void Player::move()
             break;
         }
     }
+}
+
+void Player::gotShot()
+{
+    qDebug() << "you got shot mothafucka";
 }
