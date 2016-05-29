@@ -20,7 +20,8 @@ Player::Player(GameEngine* parent, bool isRed, bool isHost) :
     mMovingTimer(new QTimer()),
     mStep(PLAYER_DEFAULT_STEP),
     mPressedKeys(),
-    mOrientation(isRed ? Qt::Key_Left : Qt::Key_Right)
+    mOrientation(isRed ? Qt::Key_Left : Qt::Key_Right),
+    mHasBulletCooldown(false)
 {
     setTransformOriginPoint(15, 30);
     QObject::connect(mMovingTimer, &QTimer::timeout, [=]
@@ -57,7 +58,7 @@ Player::Player(GameEngine* parent, bool isRed, bool isHost) :
 
 Player::~Player()
 {
-
+    delete mMovingTimer;
 }
 
 void Player::setUsername(const QString& username)
@@ -75,13 +76,17 @@ void Player::focusOutEvent(QFocusEvent*)
 
 void Player::shootBullet()
 {
+    if (mHasBulletCooldown)
+    {
+        return;
+    }
+
     if (!mIsEnemy)
     {
        mGameEngine->getParent()->getPacketManager()->sendShootBullet();
     }
 
     QPointF position = pos();
-
     switch (mOrientation)
     {
         case Qt::Key_Up:
@@ -105,6 +110,12 @@ void Player::shootBullet()
 
     Bullet* bullet = new Bullet(mOrientation, position, mIsRed);
     scene()->addItem(bullet);
+
+    mHasBulletCooldown = true;
+    QTimer::singleShot(BULLET_COOLDOWN, [=]
+    {
+       mHasBulletCooldown = false;
+    });
 }
 
 bool Player::isEventAllowed(QKeyEvent* event)

@@ -12,7 +12,6 @@ class Player :
         public QGraphicsPixmapItem
 
 {
-
 public:
     Player(GameEngine*, bool isRed, bool isHost);
     ~Player();
@@ -36,6 +35,7 @@ private:
     quint16 mStep;
     QStack<Qt::Key> mPressedKeys;
     Qt::Key mOrientation;
+    bool mHasBulletCooldown;
 
     bool isEventAllowed(QKeyEvent*);
     void move();

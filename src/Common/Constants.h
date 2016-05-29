@@ -25,8 +25,13 @@ const quint16 PLAYER_ME_START_Y = 70;
 const quint16 PLAYER_ENEMY_START_X = 540;
 const quint16 PLAYER_ENEMY_START_Y = 540;
 const quint16 PLAYER_DEFAULT_STEP = 5;
-const quint16 BULLET_STEP = 10;
+
+const quint32 GAME_BONUS_SPAWN_MIN = 5000;
+const quint32 GAME_BONUS_SPAWN_MAX = 12000;
 const quint16 GAME_UPDATE_TIME = 30;
+
+const quint16 BULLET_STEP = 10;
+const quint32 BULLET_COOLDOWN = 1500;
 
 const quint32 PEER_PORT = 49000;
 
