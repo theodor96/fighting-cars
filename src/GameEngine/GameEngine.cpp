@@ -2,10 +2,12 @@
 #include "UserInterface/MainWindow.h"
 #include "Common/Constants.h"
 #include "GameEngine/Player.h"
+#include "Network/PacketManager.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QDebug>
+#include <QKeyEvent>
 
 GameEngine::GameEngine(MainWindow* parent) :
     QObject(parent),
@@ -15,6 +17,8 @@ GameEngine::GameEngine(MainWindow* parent) :
     mPlayerMe(new Player(this, false)),
     mPlayerEnemy(new Player(this, true))
 {
+    parent->getPacketManager()->setParent(this);
+
     const QImage background(":/img/img/game_background.png");
     mScene->setBackgroundBrush(QBrush(background));
 
@@ -33,4 +37,20 @@ GameEngine::GameEngine(MainWindow* parent) :
 GameEngine::~GameEngine()
 {
 
+}
+
+MainWindow* GameEngine::getParent() const
+{
+    return mParent;
+}
+
+void GameEngine::gotKeyPressed(Qt::Key key)
+{
+
+    mPlayerEnemy->keyPressEvent(&QKeyEvent(QKeyEvent::KeyPress, key, Qt::NoModifier));
+}
+
+void GameEngine::gotKeyReleased(Qt::Key key)
+{
+    mPlayerEnemy->keyReleaseEvent(&QKeyEvent(QKeyEvent::KeyRelease, key, Qt::NoModifier));
 }

@@ -4,6 +4,7 @@
 #include "UserInterface/WaitPopup.h"
 #include "UserInterface/ConnectPopup.h"
 #include "Common/Constants.h"
+#include "GameEngine/GameEngine.h"
 
 PacketManager::PacketManager() :
     QObject(),
@@ -95,6 +96,30 @@ void PacketManager::sendAck()
     qDebug() << "sent ack";
 }
 
+void PacketManager::sendKeyPressed(Qt::Key key)
+{
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+
+    out << MESSAGE_TYPE_KEY_PRESS;
+    out << key;
+
+    mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
+    qDebug() << "sent key pressed";
+}
+
+void PacketManager::sendKeyReleased(Qt::Key key)
+{
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+
+    out << MESSAGE_TYPE_KEY_RELEASE;
+    out << key;
+
+    mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
+    qDebug() << "sent key released";
+}
+
 void PacketManager::receivedDatagram()
 {
     QHostAddress peerIPAddress;
@@ -173,6 +198,32 @@ void PacketManager::receivedDatagram()
                     break;
                 }
             }
+
+            break;
+        }
+
+        case MESSAGE_TYPE_KEY_PRESS:
+        {
+            qDebug() << "got key press";
+            qint64 key;
+            in >> key;
+
+            auto gameEngine = static_cast<GameEngine*>(mParent);
+            gameEngine->gotKeyPressed(static_cast<Qt::Key>(key));
+
+            break;
+        }
+
+        case MESSAGE_TYPE_KEY_RELEASE:
+        {
+            qDebug() << "got key release";
+            qint64 key;
+            in >> key;
+
+            auto gameEngine = static_cast<GameEngine*>(mParent);
+            gameEngine->gotKeyReleased(static_cast<Qt::Key>(key));
+
+            break;
         }
     }
 

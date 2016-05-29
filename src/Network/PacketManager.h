@@ -26,6 +26,9 @@ public:
     void sendReject();
     void sendAck();
 
+    void sendKeyPressed(Qt::Key);
+    void sendKeyReleased(Qt::Key);
+
 private:
     QString mIPAddress;
     QObject* mParent;

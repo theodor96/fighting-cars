@@ -1,6 +1,8 @@
 #include "GameEngine/GameEngine.h"
 #include "GameEngine/Player.h"
 #include "Common/Constants.h"
+#include "UserInterface/MainWindow.h"
+#include "Network/PacketManager.h"
 
 #include <QKeyEvent>
 #include <QDebug>
@@ -80,6 +82,11 @@ void Player::keyPressEvent(QKeyEvent* event)
         return;
     }
 
+    if (!mIsEnemy)
+    {
+       mGameEngine->getParent()->getPacketManager()->sendKeyPressed(static_cast<Qt::Key>(event->key()));
+    }
+
     mPressedKeys.push(static_cast<Qt::Key>(event->key()));
     if (!mMovingTimer->isActive())
     {
@@ -92,6 +99,11 @@ void Player::keyReleaseEvent(QKeyEvent* event)
     if (!isEventAllowed(event))
     {
         return;
+    }
+
+    if (!mIsEnemy)
+    {
+       mGameEngine->getParent()->getPacketManager()->sendKeyReleased(static_cast<Qt::Key>(event->key()));
     }
 
     mPressedKeys.remove(mPressedKeys.indexOf(static_cast<Qt::Key>(event->key())));

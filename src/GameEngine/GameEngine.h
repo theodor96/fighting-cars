@@ -17,6 +17,10 @@ public:
     explicit GameEngine(MainWindow*);
     ~GameEngine();
 
+    MainWindow* getParent() const;
+    void gotKeyPressed(Qt::Key);
+    void gotKeyReleased(Qt::Key);
+
 private:
     MainWindow* mParent;
     QGraphicsScene* mScene;
