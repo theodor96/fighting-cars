@@ -13,7 +13,7 @@ Player::Player(GameEngine* parent, bool isEnemy, bool isHost) :
     QGraphicsPixmapItem(),
     mGameEngine(parent),
     mUsername(),
-    mIsEnemy((isEnemy && !isHost) || (!isEnemy && isHost)),
+    mIsEnemy(!((isEnemy && !isHost) || (!isEnemy && isHost))),
     mMovingTimer(new QTimer()),
     mStep(PLAYER_DEFAULT_STEP),
     mPressedKeys()
@@ -95,6 +95,10 @@ void Player::keyPressEvent(QKeyEvent* event)
     if (!mIsEnemy)
     {
        mGameEngine->getParent()->getPacketManager()->sendKeyPressed(static_cast<Qt::Key>(event->key()));
+    }
+    else
+    {
+        qDebug() << "as trimite pachete da is enemy si nu pot";
     }
 
     mPressedKeys.push(static_cast<Qt::Key>(event->key()));
