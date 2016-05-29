@@ -102,10 +102,11 @@ void PacketManager::sendKeyPressed(Qt::Key key)
     QDataStream out(&datagram, QIODevice::WriteOnly);
 
     out << MESSAGE_TYPE_KEY_PRESS;
-    out << key;
+    out << static_cast<qint64>(key);
 
+    qDebug() << "sending " << MESSAGE_TYPE_KEY_PRESS << " " << static_cast<qint64>(key) << " to " << mIPAddress;
     mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
-    qDebug() << "sent key pressed";
+
 }
 
 void PacketManager::sendKeyReleased(Qt::Key key)
@@ -114,10 +115,10 @@ void PacketManager::sendKeyReleased(Qt::Key key)
     QDataStream out(&datagram, QIODevice::WriteOnly);
 
     out << MESSAGE_TYPE_KEY_RELEASE;
-    out << key;
+    out << static_cast<qint64>(key);
 
+    qDebug() << "sending " << MESSAGE_TYPE_KEY_RELEASE << " " << static_cast<qint64>(key) << " to " << mIPAddress;
     mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
-    qDebug() << "sent key released";
 }
 
 void PacketManager::receivedDatagram()
@@ -138,7 +139,10 @@ void PacketManager::receivedDatagram()
     QDataStream in(&datagram, QIODevice::ReadOnly);
     quint8 messageType;
 
+
+
     in >> messageType;
+    qDebug() << "got a datagram! msgtpye = " << messageType;
     switch (messageType)
     {
         case MESSAGE_TYPE_CONNECTION:
@@ -224,6 +228,11 @@ void PacketManager::receivedDatagram()
             gameEngine->gotKeyReleased(static_cast<Qt::Key>(key));
 
             break;
+        }
+
+        default:
+        {
+            qDebug() << "a intrat pe default";
         }
     }
 
