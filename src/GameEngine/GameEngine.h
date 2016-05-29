@@ -30,6 +30,7 @@ private:
     QGraphicsView* mView;
     Player* mPlayerMe;
     Player* mPlayerEnemy;
+    bool mIsHost;
 };
 
 #endif // GAMEENGINE_H

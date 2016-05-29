@@ -9,13 +9,14 @@
 #include <QDebug>
 #include <QKeyEvent>
 
-GameEngine::GameEngine(MainWindow* parent, bool mIsHost) :
+GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     QObject(parent),
     mParent(parent),
     mScene(new QGraphicsScene(0, 0, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT, this)),
     mView(new QGraphicsView(mScene)),
-    mPlayerMe(new Player(this, false, mIsHost)),
-    mPlayerEnemy(new Player(this, true, mIsHost))
+    mPlayerMe(new Player(this, false, isHost)),
+    mPlayerEnemy(new Player(this, true, isHost)),
+    mIsHost(isHost)
 {
     parent->getPacketManager()->setParent(this);
 
@@ -51,11 +52,12 @@ MainWindow* GameEngine::getParent() const
 
 void GameEngine::gotKeyPressed(Qt::Key key)
 {
-
-    mPlayerEnemy->keyPressEvent(&QKeyEvent(QKeyEvent::KeyPress, key, Qt::NoModifier));
+    auto player = mIsHost ? mPlayerEnemy : mPlayerMe;
+    player->keyPressEvent(&QKeyEvent(QKeyEvent::KeyPress, key, Qt::NoModifier));
 }
 
 void GameEngine::gotKeyReleased(Qt::Key key)
 {
-    mPlayerEnemy->keyReleaseEvent(&QKeyEvent(QKeyEvent::KeyRelease, key, Qt::NoModifier));
+    auto player = mIsHost ? mPlayerEnemy : mPlayerMe;
+    player->keyReleaseEvent(&QKeyEvent(QKeyEvent::KeyRelease, key, Qt::NoModifier));
 }
