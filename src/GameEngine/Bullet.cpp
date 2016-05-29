@@ -10,7 +10,7 @@ Bullet::Bullet(Qt::Key direction, const QPointF& position, bool isEnemyBullet) :
     mDirection(direction),
     mTimer(new QTimer())
 {
-    setPixmap(QPixmap(QString(":/images/bullet%1.png").arg(isEnemyBullet ? "_enemy" : "")));
+    setPixmap(QPixmap(QString(":/img/img/bullet%1.png").arg(isEnemyBullet ? "_enemy" : "")));
     setPos(position);
 
     QObject::connect(mTimer, &QTimer::timeout, [=]

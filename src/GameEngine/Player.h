@@ -14,7 +14,7 @@ class Player :
 {
 
 public:
-    Player(GameEngine*, bool isEnemy, bool isHost);
+    Player(GameEngine*, bool isRed, bool isHost);
     ~Player();
 
     void setUsername(const QString&);
@@ -29,6 +29,7 @@ public:
 private:
 	GameEngine* mGameEngine;
     QString mUsername;
+    bool mIsRed;
     bool mIsEnemy;
     QTimer* mMovingTimer;
     quint16 mStep;

@@ -11,15 +11,16 @@
 #include <QVector>
 #include <QTimer>
 
-Player::Player(GameEngine* parent, bool isEnemy, bool isHost) :
+Player::Player(GameEngine* parent, bool isRed, bool isHost) :
     QGraphicsPixmapItem(),
     mGameEngine(parent),
     mUsername(),
-    mIsEnemy(isEnemy == isHost),
+    mIsRed(isRed),
+    mIsEnemy(isRed == isHost),
     mMovingTimer(new QTimer()),
     mStep(PLAYER_DEFAULT_STEP),
     mPressedKeys(),
-    mOrientation(mIsEnemy ? Qt::Key_Left : Qt::Key_Right)
+    mOrientation(isRed ? Qt::Key_Left : Qt::Key_Right)
 {
     setTransformOriginPoint(15, 30);
     QObject::connect(mMovingTimer, &QTimer::timeout, [=]
@@ -27,7 +28,7 @@ Player::Player(GameEngine* parent, bool isEnemy, bool isHost) :
         move();
     });
 
-    if (isEnemy)
+    if (isRed)
     {
         setPixmap(QPixmap(":/img/img/car_enemy.png"));
         setPos(PLAYER_ENEMY_START_X, PLAYER_ENEMY_START_Y);
@@ -97,7 +98,7 @@ void Player::shootBullet()
             break;
     }
 
-    Bullet* bullet = new Bullet(mOrientation, position, mIsEnemy);
+    Bullet* bullet = new Bullet(mOrientation, position, mIsRed);
     scene()->addItem(bullet);
 }
 
@@ -217,5 +218,5 @@ void Player::move()
 
 void Player::gotShot()
 {
-    qDebug() << "you got shot mothafucka";
+    qDebug() << "I am " << mIsEnemy << " and i got shot";
 }
