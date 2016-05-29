@@ -123,6 +123,16 @@ void PacketManager::sendKeyReleased(Qt::Key key, const QPointF& myPosition)
     mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
 }
 
+void PacketManager::sendShootBullet()
+{
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+
+    out << MESSAGE_TYPE_KEY_SHOOT;
+
+    mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
+}
+
 void PacketManager::receivedDatagram()
 {
     QHostAddress peerIPAddress;
@@ -232,6 +242,14 @@ void PacketManager::receivedDatagram()
             gameEngine->gotKeyReleased(static_cast<Qt::Key>(key), QPointF(peerX, peerY));
 
             break;
+        }
+
+        case MESSAGE_TYPE_KEY_SHOOT:
+        {
+            qDebug() << "got key shoot";
+
+            auto gameEngine = static_cast<GameEngine*>(mParent);
+            gameEngine->gotShootBullet();
         }
     }
 

@@ -75,6 +75,11 @@ void Player::focusOutEvent(QFocusEvent*)
 
 void Player::shootBullet()
 {
+    if (!mIsEnemy)
+    {
+       mGameEngine->getParent()->getPacketManager()->sendShootBullet();
+    }
+
     QPointF position = pos();
 
     switch (mOrientation)

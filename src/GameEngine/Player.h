@@ -25,6 +25,7 @@ public:
     void keyReleaseEvent(QKeyEvent*) override;
 
     void gotShot();
+    void shootBullet();
 
 private:
 	GameEngine* mGameEngine;
@@ -38,7 +39,7 @@ private:
 
     bool isEventAllowed(QKeyEvent*);
     void move();
-    void shootBullet();
+    ;
 };
 
 #endif // PLAYER_H

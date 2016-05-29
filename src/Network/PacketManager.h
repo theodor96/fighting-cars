@@ -29,6 +29,8 @@ public:
     void sendKeyPressed(Qt::Key);
     void sendKeyReleased(Qt::Key, const QPointF&);
 
+    void sendShootBullet();
+
 private:
     QString mIPAddress;
     QObject* mParent;

@@ -31,18 +31,13 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     mPlayerMe->setUsername(mParent->getUsername());
     mPlayerEnemy->setUsername(mParent->getEnemyUsername());
 
-    add(mPlayerMe);
-    add(mPlayerEnemy);
+    mScene->addItem(mPlayerMe);
+    mScene->addItem(mPlayerEnemy);
 }
 
 GameEngine::~GameEngine()
 {
 
-}
-
-void GameEngine::add(QGraphicsItem* item)
-{
-    mScene->addItem(item);
 }
 
 MainWindow* GameEngine::getParent() const
@@ -61,4 +56,10 @@ void GameEngine::gotKeyReleased(Qt::Key key, const QPointF& peerPosition)
     auto player = mIsHost ? mPlayerEnemy : mPlayerMe;
     player->keyReleaseEvent(&QKeyEvent(QKeyEvent::KeyRelease, key, Qt::NoModifier));
     player->setPos(peerPosition);
+}
+
+void GameEngine::gotShootBullet()
+{
+    auto player = mIsHost ? mPlayerEnemy : mPlayerMe;
+    player->shootBullet();
 }

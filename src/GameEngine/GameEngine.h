@@ -7,7 +7,6 @@ class MainWindow;
 class QGraphicsScene;
 class QGraphicsView;
 class Player;
-class QGraphicsItem;
 
 class GameEngine :
         public QObject
@@ -22,7 +21,7 @@ public:
     void gotKeyPressed(Qt::Key);
     void gotKeyReleased(Qt::Key, const QPointF&);
 
-    void add(QGraphicsItem*);
+    void gotShootBullet();
 
 private:
     MainWindow* mParent;
