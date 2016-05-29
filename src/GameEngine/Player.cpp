@@ -9,11 +9,11 @@
 #include <QVector>
 #include <QTimer>
 
-Player::Player(GameEngine* parent, bool isEnemy) :
+Player::Player(GameEngine* parent, bool isEnemy, bool isHost) :
     QGraphicsPixmapItem(),
     mGameEngine(parent),
     mUsername(),
-    mIsEnemy(isEnemy),
+    mIsEnemy((isEnemy && !isHost) || (!isEnemy && isHost)),
     mMovingTimer(new QTimer()),
     mStep(PLAYER_DEFAULT_STEP),
     mPressedKeys()
@@ -30,14 +30,24 @@ Player::Player(GameEngine* parent, bool isEnemy) :
         setPos(PLAYER_ENEMY_START_X, PLAYER_ENEMY_START_Y);
         qDebug() << "enemy plr constructed";
         setRotation(-90);
+
+        if (!isHost)
+        {
+            setFlag(QGraphicsItem::ItemIsFocusable);
+            setFocus();
+        }
     }
     else
     {
         setPixmap(QPixmap(":/img/img/car.png"));
         setPos(PLAYER_ME_START_X, PLAYER_ME_START_Y);
-        setFlag(QGraphicsItem::ItemIsFocusable);
-        setFocus();
         setRotation(90);
+
+        if (isHost)
+        {
+            setFlag(QGraphicsItem::ItemIsFocusable);
+            setFocus();
+        }
     }
 }
 

@@ -14,7 +14,7 @@ class Player :
 {
 
 public:
-    Player(GameEngine*, bool);
+    Player(GameEngine*, bool isEnemy, bool isHost);
     ~Player();
 
     void setUsername(const QString&);
