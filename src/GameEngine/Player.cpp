@@ -13,7 +13,7 @@ Player::Player(GameEngine* parent, bool isEnemy, bool isHost) :
     QGraphicsPixmapItem(),
     mGameEngine(parent),
     mUsername(),
-    mIsEnemy(!((isEnemy && !isHost) || (!isEnemy && isHost))),
+    mIsEnemy(isEnemy == isHost),
     mMovingTimer(new QTimer()),
     mStep(PLAYER_DEFAULT_STEP),
     mPressedKeys()
