@@ -61,7 +61,7 @@ void WaitPopup::gotConnectRequest(const QString& enemyUsername)
 void WaitPopup::gotAckConfirmation()
 {
     MainWindow* mainWindow = static_cast<MainWindow*>(this->parent());
-    mainWindow->startGame();
+    mainWindow->startGame(true);
     //porneste jocul
     qDebug() << "start game-wait";
     this->close();

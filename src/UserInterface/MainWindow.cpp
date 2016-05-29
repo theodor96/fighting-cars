@@ -54,9 +54,9 @@ const QString MainWindow::getUsername() const
     return ui->mUsernameLineEdit->text();
 }
 
-void MainWindow::startGame()
+void MainWindow::startGame(bool mIsHost)
 {
-    auto gameEngine = new GameEngine(this);
+    auto gameEngine = new GameEngine(this, mIsHost);
 }
 
 void MainWindow::connectSignalsToSlots()

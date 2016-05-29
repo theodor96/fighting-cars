@@ -14,7 +14,7 @@ class GameEngine :
     Q_OBJECT
 
 public:
-    explicit GameEngine(MainWindow*);
+    GameEngine(MainWindow*, bool);
     ~GameEngine();
 
     MainWindow* getParent() const;

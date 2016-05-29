@@ -9,13 +9,13 @@
 #include <QDebug>
 #include <QKeyEvent>
 
-GameEngine::GameEngine(MainWindow* parent) :
+GameEngine::GameEngine(MainWindow* parent, bool mIsHost) :
     QObject(parent),
     mParent(parent),
     mScene(new QGraphicsScene(0, 0, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT, this)),
     mView(new QGraphicsView(mScene)),
-    mPlayerMe(new Player(this, false)),
-    mPlayerEnemy(new Player(this, true))
+    mPlayerMe(new Player(this, mIsHost)),
+    mPlayerEnemy(new Player(this, mIsHost))
 {
     parent->getPacketManager()->setParent(this);
 

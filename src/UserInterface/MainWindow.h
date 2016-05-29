@@ -25,7 +25,7 @@ public:
     PacketManager* getPacketManager() const;
     const QString getUsername() const;
 
-    void startGame();
+    void startGame(bool mIsHost);
 
 private:
     void connectSignalsToSlots();
