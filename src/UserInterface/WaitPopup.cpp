@@ -5,6 +5,7 @@
 #include "UserInterface/WaitPopup.h"
 #include "UserInterface/MainWindow.h"
 #include "Network/PacketWriter.h"
+#include "Network/PacketReader.h"
 #include "Common/Constants.h"
 
 #include <QDebug>
@@ -24,7 +25,9 @@ WaitPopup::WaitPopup(QWidget* parent) :
     ui->mWaitingLabelImage->setMovie(mMovie);
     mMovie->start();
 
-    static_cast<MainWindow*>(parent)->getPacketWriter()->setParent(this);
+    auto mainWindow = static_cast<MainWindow*>(parent);
+    mainWindow->getPacketWriter()->setParent(this);
+    mainWindow->getPacketReader()->startListening();
 }
 
 WaitPopup::~WaitPopup()

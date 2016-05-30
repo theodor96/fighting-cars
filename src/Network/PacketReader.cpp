@@ -15,8 +15,6 @@ PacketReader::PacketReader(PacketWriter* packetWriter) :
     mDatagram(),
     mDataStream(mDatagram)
 {
-    mSocket->bind(QHostAddress::Any, PEER_PORT);
-
     QObject::connect(mSocket, &QUdpSocket::readyRead, [=]
     {
         if (mSocket->hasPendingDatagrams())
@@ -33,10 +31,17 @@ PacketReader::~PacketReader()
 
 }
 
+void PacketReader::startListening()
+{
+    mSocket->bind(QHostAddress::Any, PEER_PORT);
+}
+
 void PacketReader::receivedDatagram()
 {
     quint8 messageType;
     mDataStream >> messageType;
+
+    qDebug() << "got packet " << messageType;
 
     switch (messageType)
     {
