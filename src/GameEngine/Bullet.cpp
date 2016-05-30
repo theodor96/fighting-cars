@@ -6,12 +6,13 @@
 #include "Common/Constants.h"
 #include "GameEngine/Player.h"
 
-Bullet::Bullet(Qt::Key direction, const QPointF& position, bool isEnemyBullet) :
+Bullet::Bullet(Qt::Key direction, const QPointF& position, bool isEnemyBullet, bool isExtra) :
     QGraphicsPixmapItem(),
     mDirection(direction),
-    mTimer(new QTimer())
+    mTimer(new QTimer()),
+    mIsExtra(isExtra)
 {
-    setPixmap(QPixmap(QString(":/img/img/bullet%1.png").arg(isEnemyBullet ? "_enemy" : "")));
+    setPixmap(QPixmap(QString(":/img/img/bullet%1.png").arg(isExtra? "_extra" : (isEnemyBullet ? "_enemy" : ""))));
     setPos(position);
 
     QObject::connect(mTimer, &QTimer::timeout, [=]

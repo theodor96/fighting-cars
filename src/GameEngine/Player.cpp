@@ -23,7 +23,8 @@ Player::Player(GameEngine* parent, bool isRed, bool isHost) :
     mPressedKeys(),
     mOrientation(isRed ? Qt::Key_Left : Qt::Key_Right),
     mHasBulletCooldown(false),
-    mLives(PLAYER_DEFAULT_LIVES)
+    mLives(PLAYER_DEFAULT_LIVES),
+    mExtraDamageBuletsNumber(0)
 {
     setTransformOriginPoint(15, 30);
     QObject::connect(mMovingTimer, &QTimer::timeout, [=]
@@ -110,7 +111,8 @@ void Player::shootBullet()
             break;
     }
 
-    Bullet* bullet = new Bullet(mOrientation, position, mIsRed);
+    bool isExtra = (mExtraDamageBuletsNumber > 0) ? true : false;//aici e o problema
+    Bullet* bullet = new Bullet(mOrientation, position, mIsRed, isExtra);
     scene()->addItem(bullet);
 
     mHasBulletCooldown = true;
@@ -262,6 +264,21 @@ void Player::gotBonus(quint32 type)
 
             ++mLives;
             break;
+        }
+        case GAME_BONUS_TYPE_SPEED:
+        {
+            if(mStep == PLAYER_DEFAULT_STEP)
+            {
+                mStep = PLAYER_BONUS_STEP;
+                QTimer::singleShot(GAME_BONUS_SPEED_TIME, [=]
+                {
+                    mStep = PLAYER_DEFAULT_STEP;
+                });
+            }
+        }
+        case GAME_BONUS_TYPE_DAMAGE:
+        {
+            mExtraDamageBuletsNumber += GAME_BONUS_DAMAGE_NUMBER;
         }
     }
 }

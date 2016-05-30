@@ -17,5 +17,8 @@
         <file>img/test.gif</file>
         <file>img/lol.gif</file>
         <file>img/bonus_1.png</file>
+        <file>img/bonus_2.png</file>
+        <file>img/bonus_3.png</file>
+        <file>img/bullet_extra.png</file>
     </qresource>
 </RCC>

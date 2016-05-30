@@ -26,6 +26,7 @@ const quint16 PLAYER_ME_START_Y = 70;
 const quint16 PLAYER_ENEMY_START_X = 540;
 const quint16 PLAYER_ENEMY_START_Y = 540;
 const quint16 PLAYER_DEFAULT_STEP = 5;
+const quint16 PLAYER_BONUS_STEP = 10;
 const quint8 PLAYER_DEFAULT_LIVES = 5;
 const quint8 PLAYER_MAX_LIVES = 8;
 
@@ -33,7 +34,11 @@ const quint32 GAME_BONUS_SPAWN_MIN = 1000;
 const quint32 GAME_BONUS_SPAWN_MAX = 2000;
 const quint8 GAME_BONUS_TYPE_FIRST = 1;
 const quint8 GAME_BONUS_TYPE_LIFE = 1;
-const quint8 GAME_BONUS_TYPE_LAST = 1;
+const quint8 GAME_BONUS_TYPE_SPEED = 2;
+const quint8 GAME_BONUS_TYPE_DAMAGE = 3;
+const quint8 GAME_BONUS_TYPE_LAST = 3;
+const quint16 GAME_BONUS_SPEED_TIME = 5000;
+const quint16 GAME_BONUS_DAMAGE_NUMBER= 3;
 const quint16 GAME_UPDATE_TIME = 30;
 
 const quint16 BULLET_STEP = 10;

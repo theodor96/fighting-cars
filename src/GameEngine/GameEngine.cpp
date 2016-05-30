@@ -43,6 +43,7 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
         qsrand(QTime::currentTime().msec());
         this->connect(mBonusTimer, &QTimer::timeout, this, [=]
         {
+            qDebug() << "Generated bonus";
             spawnBonus(getRandomBetween(GAME_BONUS_TYPE_FIRST, GAME_BONUS_TYPE_LAST),
                        QPointF(getRandomBetween(PLAYER_ME_START_X, PLAYER_ENEMY_START_X), getRandomBetween(PLAYER_ME_START_Y, PLAYER_ENEMY_START_Y)));
 

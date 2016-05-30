@@ -12,12 +12,13 @@ class Bullet :
 
 {
 public:
-    Bullet(Qt::Key, const QPointF&, bool);
+    Bullet(Qt::Key, const QPointF&, bool, bool);
     ~Bullet();
 
 private:
     Qt::Key mDirection;
     QTimer* mTimer;
+    bool mIsExtra;
 
     void move();
 };
