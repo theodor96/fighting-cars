@@ -50,25 +50,34 @@ QLabel
    <widget class="QLabel" name="mInstructionsLabel">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>90</y>
-      <width>191</width>
-      <height>71</height>
+      <x>340</x>
+      <y>50</y>
+      <width>291</width>
+      <height>151</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>Instructiuni</string>
+     <string>You control your car with your arrow keys
+With &quot;Space&quot; you shoot your oponent
+
+The initial lives number is 5 but you can gather up to
+8 lives during the game
+
+Other bonuses give you extra speed or a more
+powerful weapon
+
+</string>
     </property>
    </widget>
    <widget class="QLabel" name="mUsernameLabel">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>220</y>
-      <width>101</width>
+      <x>270</x>
+      <y>310</y>
+      <width>61</width>
       <height>21</height>
      </rect>
     </property>
@@ -85,8 +94,8 @@ QLabel
    <widget class="QLineEdit" name="mUsernameLineEdit">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>250</y>
+      <x>340</x>
+      <y>310</y>
       <width>113</width>
       <height>16</height>
      </rect>
