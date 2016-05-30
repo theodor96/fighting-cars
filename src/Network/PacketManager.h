@@ -15,6 +15,7 @@ public:
     virtual ~PacketManager();
 
     void setParent(QObject*);
+    bool hasParent() const;
     QHostAddress& getPeerAddress();
 
 protected:

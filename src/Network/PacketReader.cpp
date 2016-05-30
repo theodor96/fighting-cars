@@ -17,7 +17,7 @@ PacketReader::PacketReader(PacketWriter* packetWriter) :
 {
     QObject::connect(mSocket, &QUdpSocket::readyRead, [=]
     {
-        if (mParent == nullptr)
+        if (!hasParent())
         {
             return;
         }
