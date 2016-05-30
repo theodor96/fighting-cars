@@ -40,7 +40,6 @@ void Bullet::move()
             delete this;
             return;
         }
-
     }
 
     if (y() < PLAYER_ME_START_Y || y() > PLAYER_ENEMY_START_Y || x() < PLAYER_ME_START_X || x() > PLAYER_ENEMY_START_X)

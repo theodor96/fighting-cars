@@ -6,7 +6,6 @@
         <file>img/car.png</file>
         <file>img/car_enemy.png</file>
         <file>img/exit.png</file>
-        <file>img/extralife.png</file>
         <file>img/icon.ico</file>
         <file>img/new.png</file>
         <file>img/qt.png</file>
@@ -17,5 +16,6 @@
         <file>img/waiting.gif</file>
         <file>img/test.gif</file>
         <file>img/lol.gif</file>
+        <file>img/bonus_1.png</file>
     </qresource>
 </RCC>

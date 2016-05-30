@@ -4,6 +4,7 @@
 #include "UserInterface/MainWindow.h"
 #include "Network/PacketManager.h"
 #include "GameEngine/Bullet.h"
+#include "GameEngine/Bonus.h"
 
 #include <QKeyEvent>
 #include <QDebug>
@@ -21,7 +22,8 @@ Player::Player(GameEngine* parent, bool isRed, bool isHost) :
     mStep(PLAYER_DEFAULT_STEP),
     mPressedKeys(),
     mOrientation(isRed ? Qt::Key_Left : Qt::Key_Right),
-    mHasBulletCooldown(false)
+    mHasBulletCooldown(false),
+    mLives(PLAYER_DEFAULT_LIVES)
 {
     setTransformOriginPoint(15, 30);
     QObject::connect(mMovingTimer, &QTimer::timeout, [=]
@@ -180,7 +182,12 @@ void Player::move()
 {
     for (auto& item : this->collidingItems())
     {
-        //bonus collection
+        if (Bonus* bonus = dynamic_cast<Bonus*>(item))
+        {
+            gotBonus(bonus->getType());
+            delete bonus;
+            break;
+        }
     }
 
     if (mPressedKeys.isEmpty())
@@ -235,4 +242,21 @@ void Player::move()
 void Player::gotShot()
 {
     qDebug() << "I am " << mIsEnemy << " and i got shot";
+}
+
+void Player::gotBonus(quint32 type)
+{
+    switch (type)
+    {
+        case GAME_BONUS_TYPE_LIFE:
+        {
+            if (mLives == PLAYER_MAX_LIVES)
+            {
+                return;
+            }
+
+            ++mLives;
+            break;
+        }
+    }
 }

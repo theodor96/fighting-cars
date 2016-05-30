@@ -30,6 +30,7 @@ public:
     void sendKeyReleased(Qt::Key, const QPointF&);
 
     void sendShootBullet();
+    void sendSpawnBonus(quint32, const QPointF&);
 
 private:
     QString mIPAddress;

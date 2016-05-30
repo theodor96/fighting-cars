@@ -24,6 +24,7 @@ public:
     void keyReleaseEvent(QKeyEvent*) override;
 
     void gotShot();
+    void gotBonus(quint32);
     void shootBullet();
 
 private:
@@ -36,6 +37,7 @@ private:
     QStack<Qt::Key> mPressedKeys;
     Qt::Key mOrientation;
     bool mHasBulletCooldown;
+    quint8 mLives;
 
     bool isEventAllowed(QKeyEvent*);
     void move();

@@ -43,6 +43,7 @@ HEADERS +=  src/Common/Constants.h \
             src/GameEngine/GameEngine.h \
             src/GameEngine/Player.h \
             src/GameEngine/Bullet.h \
+            src/GameEngine/Bonus.h \
 
 SOURCES +=  src/Common/main.cpp \
             src/UserInterface/MainWindow.cpp \
@@ -53,4 +54,5 @@ SOURCES +=  src/Common/main.cpp \
             src/GameEngine/GameEngine.cpp \
             src/GameEngine/Player.cpp \
             src/GameEngine/Bullet.cpp \
+            src/GameEngine/Bonus.cpp \
 ###################################################

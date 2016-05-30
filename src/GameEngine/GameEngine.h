@@ -7,6 +7,7 @@ class MainWindow;
 class QGraphicsScene;
 class QGraphicsView;
 class Player;
+class QTimer;
 
 class GameEngine :
         public QObject
@@ -22,6 +23,7 @@ public:
     void gotKeyReleased(Qt::Key, const QPointF&);
 
     void gotShootBullet();
+    void spawnBonus(quint32, const QPointF&);
 
 private:
     MainWindow* mParent;
@@ -30,6 +32,9 @@ private:
     Player* mPlayerMe;
     Player* mPlayerEnemy;
     bool mIsHost;
+    QTimer* mBonusTimer;
+
+    quint32 getRandomBetween(quint32, quint32) const;
 };
 
 #endif // GAMEENGINE_H

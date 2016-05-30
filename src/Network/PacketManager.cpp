@@ -133,6 +133,19 @@ void PacketManager::sendShootBullet()
     mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
 }
 
+void PacketManager::sendSpawnBonus(quint32 type, const QPointF& position)
+{
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+
+    out << MESSAGE_TYPE_BONUS_SPAWN;
+    out << type;
+    out << position.x();
+    out << position.y();
+
+    mSocket->writeDatagram(datagram, QHostAddress(mIPAddress), PEER_PORT);
+}
+
 void PacketManager::receivedDatagram()
 {
     QHostAddress peerIPAddress;
@@ -250,27 +263,25 @@ void PacketManager::receivedDatagram()
 
             auto gameEngine = static_cast<GameEngine*>(mParent);
             gameEngine->gotShootBullet();
+
+            break;
         }
-    }
 
-    /*qint64 keyInt;
-    Qt::Key key;
-
-    in >> type;
-    in >> keyInt;
-    key = static_cast<Qt::Key>(keyInt);
-
-    if (type == 1)
-    {
-        mPlr->keyPressEvent(&KeyEvent(key));
-    }
-    else
-    {
-        if (type == 2)
+        case MESSAGE_TYPE_BONUS_SPAWN:
         {
-            mPlr->keyReleaseEvent(&KeyEvent(key));
+            qDebug() << "got bonus received";
+            quint32 type;
+            qreal bonusX;
+            qreal bonusY;
+
+            in >> type;
+            in >> bonusX;
+            in >> bonusY;
+
+            auto gameEngine = static_cast<GameEngine*>(mParent);
+            gameEngine->spawnBonus(type, QPointF(bonusX, bonusY));
+
+            break;
         }
     }
-
-    qDebug() << "Receiving*/
 }
