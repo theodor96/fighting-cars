@@ -27,6 +27,8 @@ public:
     void gotBonus(quint32);
     void shootBullet();
 
+    bool isEnemy() const;
+
 private:
 	GameEngine* mGameEngine;
     QString mUsername;

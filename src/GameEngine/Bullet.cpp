@@ -37,6 +37,11 @@ void Bullet::move()
     {
         if (Player* plr = dynamic_cast<Player*>(item))
         {
+            if (!plr->isEnemy())
+            {
+                continue;
+            }
+
             plr->gotShot(mIsExtra);
             delete this;
             return;

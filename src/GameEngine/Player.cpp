@@ -304,3 +304,8 @@ void Player::gotBonus(quint32 type)
         }
     }
 }
+
+bool Player::isEnemy() const
+{
+    return mIsEnemy;
+}
