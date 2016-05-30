@@ -37,7 +37,7 @@ void Bullet::move()
     {
         if (Player* plr = dynamic_cast<Player*>(item))
         {
-            plr->gotShot();
+            plr->gotShot(mIsExtra);
             delete this;
             return;
         }

@@ -112,6 +112,10 @@ void Player::shootBullet()
     }
 
     bool isExtra = (mExtraDamageBuletsNumber > 0) ? true : false;//aici e o problema
+    if (isExtra && mExtraDamageBuletsNumber > 0)
+    {
+        --mExtraDamageBuletsNumber;
+    }
     Bullet* bullet = new Bullet(mOrientation, position, mIsRed, isExtra);
     scene()->addItem(bullet);
 
@@ -246,9 +250,9 @@ void Player::move()
     }
 }
 
-void Player::gotShot()
+void Player::gotShot(bool isExtra)
 {
-    qDebug() << "I am " << mIsEnemy << " and i got shot";
+    qDebug() << "I am " << mIsEnemy << " and i got shot " << (isExtra ? "by an extra damage bullet" : "");
 }
 
 void Player::gotBonus(quint32 type)
@@ -278,7 +282,7 @@ void Player::gotBonus(quint32 type)
         }
         case GAME_BONUS_TYPE_DAMAGE:
         {
-            mExtraDamageBuletsNumber += GAME_BONUS_DAMAGE_NUMBER;
+            mExtraDamageBuletsNumber = GAME_BONUS_DAMAGE_NUMBER;
         }
     }
 }

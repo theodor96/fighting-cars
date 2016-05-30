@@ -23,7 +23,7 @@ public:
     void keyPressEvent(QKeyEvent*) override;
     void keyReleaseEvent(QKeyEvent*) override;
 
-    void gotShot();
+    void gotShot(bool);
     void gotBonus(quint32);
     void shootBullet();
 
