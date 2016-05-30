@@ -38,10 +38,10 @@ void PacketReader::startListening()
 
 void PacketReader::receivedDatagram()
 {
-    quint8 messageType;
+    quint64 messageType;
     mDataStream >> messageType;
 
-    qDebug() << "got packet " << messageType;
+    qDebug() << "got packet type " << messageType;
 
     switch (messageType)
     {
