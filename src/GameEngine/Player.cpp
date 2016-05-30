@@ -19,6 +19,7 @@ Player::Player(GameEngine* parent, bool isRed, bool isHost) :
     mIsRed(isRed),
     mIsEnemy(isRed == isHost),
     mMovingTimer(new QTimer()),
+    mSpeedBonusTimer(new QTimer()),
     mStep(PLAYER_DEFAULT_STEP),
     mPressedKeys(),
     mOrientation(isRed ? Qt::Key_Left : Qt::Key_Right),
@@ -30,6 +31,12 @@ Player::Player(GameEngine* parent, bool isRed, bool isHost) :
     QObject::connect(mMovingTimer, &QTimer::timeout, [=]
     {
         move();
+    });
+
+    mSpeedBonusTimer->setSingleShot(true);
+    QObject::connect(mSpeedBonusTimer, &QTimer::timeout, [=]
+    {
+        mStep = PLAYER_DEFAULT_STEP;
     });
 
     if (isRed)
@@ -62,6 +69,7 @@ Player::Player(GameEngine* parent, bool isRed, bool isHost) :
 Player::~Player()
 {
     delete mMovingTimer;
+    delete mSpeedBonusTimer;
 }
 
 void Player::setUsername(const QString& username)
@@ -253,6 +261,19 @@ void Player::move()
 void Player::gotShot(bool isExtra)
 {
     qDebug() << "I am " << mIsEnemy << " and i got shot " << (isExtra ? "by an extra damage bullet" : "");
+    if (isExtra)
+    {
+        mLives -= BULLET_BONUS_POWER;
+    }
+    else
+    {
+        mLives -= BULLET_POWER;
+    }
+    if (mLives <= 0)
+    {
+       qDebug() << "you dead cuz";
+    }
+
 }
 
 void Player::gotBonus(quint32 type)
@@ -265,20 +286,17 @@ void Player::gotBonus(quint32 type)
             {
                 return;
             }
-
             ++mLives;
             break;
         }
         case GAME_BONUS_TYPE_SPEED:
         {
-            if(mStep == PLAYER_DEFAULT_STEP)
+            mStep = PLAYER_BONUS_STEP;
+            if (mSpeedBonusTimer->isActive())
             {
-                mStep = PLAYER_BONUS_STEP;
-                QTimer::singleShot(GAME_BONUS_SPEED_TIME, [=]
-                {
-                    mStep = PLAYER_DEFAULT_STEP;
-                });
+               mSpeedBonusTimer->stop();
             }
+            mSpeedBonusTimer->start(GAME_BONUS_SPEED_TIME);
         }
         case GAME_BONUS_TYPE_DAMAGE:
         {

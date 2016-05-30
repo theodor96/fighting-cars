@@ -33,6 +33,7 @@ private:
     bool mIsRed;
     bool mIsEnemy;
     QTimer* mMovingTimer;
+    QTimer* mSpeedBonusTimer;
     quint16 mStep;
     QStack<Qt::Key> mPressedKeys;
     Qt::Key mOrientation;

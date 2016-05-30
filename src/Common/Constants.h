@@ -39,10 +39,12 @@ const quint8 GAME_BONUS_TYPE_DAMAGE = 3;
 const quint8 GAME_BONUS_TYPE_LAST = 3;
 const quint16 GAME_BONUS_SPEED_TIME = 5000;
 const quint16 GAME_BONUS_DAMAGE_NUMBER= 3;
+const quint8 BULLET_BONUS_POWER = 2;
 const quint16 GAME_UPDATE_TIME = 30;
 
 const quint16 BULLET_STEP = 10;
 const quint32 BULLET_COOLDOWN = 1500;
+const quint8 BULLET_POWER = 1;
 
 const quint32 PEER_PORT = 49000;
 
