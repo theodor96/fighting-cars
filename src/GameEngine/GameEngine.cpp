@@ -2,7 +2,7 @@
 #include "UserInterface/MainWindow.h"
 #include "Common/Constants.h"
 #include "GameEngine/Player.h"
-#include "Network/PacketManager.h"
+#include "Network/PacketWriter.h"
 #include "GameEngine/Bonus.h"
 
 #include <QGraphicsScene>
@@ -22,7 +22,7 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     mIsHost(isHost),
     mBonusTimer(new QTimer())
 {
-    parent->getPacketManager()->setParent(this);
+    parent->getPacketWriter()->setParent(this);
 
     const QImage background(":/img/img/game_background.png");
     mScene->setBackgroundBrush(QBrush(background));
@@ -95,7 +95,7 @@ void GameEngine::spawnBonus(quint32 type, const QPointF& position)
 
     if (mIsHost)
     {
-        mParent->getPacketManager()->sendSpawnBonus(type, position);
+        mParent->getPacketWriter()->sendSpawnBonus(type, position);
     }
 }
 

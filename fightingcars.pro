@@ -40,6 +40,8 @@ HEADERS +=  src/Common/Constants.h \
             src/UserInterface/ConnectPopup.h \
             src/UserInterface/WaitPopup.h \
             src/Network/PacketManager.h \
+            src/Network/PacketReader.h \
+            src/Network/PacketWriter.h \
             src/GameEngine/GameEngine.h \
             src/GameEngine/Player.h \
             src/GameEngine/Bullet.h \
@@ -51,6 +53,8 @@ SOURCES +=  src/Common/main.cpp \
             src/UserInterface/ConnectPopup.cpp \
             src/UserInterface/WaitPopup.cpp \
             src/Network/PacketManager.cpp \
+            src/Network/PacketReader.cpp \
+            src/Network/PacketWriter.cpp \
             src/GameEngine/GameEngine.cpp \
             src/GameEngine/Player.cpp \
             src/GameEngine/Bullet.cpp \

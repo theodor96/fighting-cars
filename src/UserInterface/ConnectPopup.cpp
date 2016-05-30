@@ -3,7 +3,7 @@
 #include "UserInterface/ConnectPopup.h"
 #include "UserInterface/MainWindow.h"
 #include "Common/Constants.h"
-#include "Network/PacketManager.h"
+#include "Network/PacketWriter.h"
 
 #include <QDebug>
 #include <QRegExp>
@@ -17,7 +17,7 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
     ui->setupUi(this);
 
     auto mainWindow = static_cast<MainWindow*>(parent);
-    mainWindow->getPacketManager()->setParent(this);
+    mainWindow->getPacketWriter()->setParent(this);
 
     this->setFixedSize(CONNECT_POPUP_WIDTH, CONNECT_POPUP_WIDTH);
 
@@ -37,8 +37,8 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
 
     this->connect(ui->mConnectBtn, &QPushButton::clicked, this, [=]
     {
-        mainWindow->getPacketManager()->setIPAddress(ui->mIpLineEdit->text());
-        mainWindow->getPacketManager()->sendConnectRequest(mainWindow->getUsername());
+        mainWindow->getPacketWriter()->setPeerAddress(QHostAddress(ui->mIpLineEdit->text()));
+        mainWindow->getPacketWriter()->sendConnect(mainWindow->getUsername());
         ui->mStateLabel->setText(STR_RESP_CONNECTING);
         ui->mConnectBtn->setEnabled(false);
         ui->mIpLineEdit->setEnabled(false);
@@ -48,7 +48,7 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
 ConnectPopup::~ConnectPopup()
 {
     delete ui;
-    static_cast<MainWindow*>(this->parent())->getPacketManager()->setParent(nullptr);
+    static_cast<MainWindow*>(this->parent())->getPacketWriter()->setParent(nullptr);
 }
 
 void ConnectPopup::gotReceived()
@@ -59,7 +59,7 @@ void ConnectPopup::gotReceived()
 void ConnectPopup::gotAccept(const QString& enemyUsername)
 {
     MainWindow* mainWindow = static_cast<MainWindow*>(this->parent());
-    mainWindow->getPacketManager()->sendAck();
+    mainWindow->getPacketWriter()->sendAck();
     mainWindow->setEnemyUsername(enemyUsername);
     this->close();
     mainWindow->startGame(false);

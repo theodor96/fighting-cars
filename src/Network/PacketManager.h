@@ -1,41 +1,36 @@
 #ifndef PACKETMANAGER_H
 #define PACKETMANAGER_H
 
-#include <QObject>
+#include <QString>
+#include <QHostAddress>
 
 class QUdpSocket;
-class WaitPopup;
+class QObject;
 
-class PacketManager :
-        public QObject
+class PacketManager
 {
-    Q_OBJECT
 
 public:
     PacketManager();
-    ~PacketManager();
+    virtual ~PacketManager();
 
-    void receivedDatagram();
     void setParent(QObject*);
 
-    void setIPAddress(const QString&);
+    const QHostAddress& getPeerAddress() const;
+    void setPeerAddress(const QHostAddress&);
 
-    void sendConnectRequest(const QString&);
-    void sendReceived();
-    void sendAccept(const QString&);
-    void sendReject();
-    void sendAck();
+protected:
+    QUdpSocket* mSocket;
+    QHostAddress mPeerAddress;
 
-    void sendKeyPressed(Qt::Key);
-    void sendKeyReleased(Qt::Key, const QPointF&);
-
-    void sendShootBullet();
-    void sendSpawnBonus(quint32, const QPointF&);
+    template<typename Parent>
+    Parent* getParent() const
+    {
+        return static_cast<Parent*>(mParent);
+    }
 
 private:
-    QString mIPAddress;
     QObject* mParent;
-    QUdpSocket* mSocket;
 };
 
 #endif // PACKETMANAGER_H
