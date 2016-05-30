@@ -15,6 +15,8 @@ PacketReader::PacketReader(PacketWriter* packetWriter) :
     mDatagram(),
     mDataStream(&mDatagram, QIODevice::ReadOnly)
 {
+    mSocket->bind(QHostAddress::Any, PEER_PORT);
+
     QObject::connect(mSocket, &QUdpSocket::readyRead, [=]
     {
         if (!hasParent())
@@ -32,16 +34,6 @@ PacketReader::PacketReader(PacketWriter* packetWriter) :
 }
 
 PacketReader::~PacketReader()
-{
-
-}
-
-void PacketReader::startListening()
-{
-    mSocket->bind(QHostAddress::Any, PEER_PORT);
-}
-
-void PacketReader::stopListening()
 {
     mSocket->close();
 }
