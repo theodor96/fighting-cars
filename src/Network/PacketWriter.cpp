@@ -35,9 +35,14 @@ void PacketWriter::sendReceived()
 
 void PacketWriter::sendAccept(const QString& username)
 {
+    qDebug() << "before writing, size =" << mDatagram.size();
+
     mDataStream << MESSAGE_TYPE_CONNECTION;
     mDataStream << MESSAGE_TYPE_CONNECTION_ACCEPT;
     mDataStream << username;
+
+    qDebug() << "after writing, siuze = " << mDatagram.size();
+
     sendPacket();
 }
 
