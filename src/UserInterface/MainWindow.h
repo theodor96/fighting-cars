@@ -9,6 +9,7 @@ namespace Ui
 }
 
 class PacketWriter;
+class PacketReader;
 
 class MainWindow :
         public QMainWindow
@@ -16,7 +17,7 @@ class MainWindow :
     Q_OBJECT
 
 public:
-    explicit MainWindow(PacketWriter*);
+    explicit MainWindow(PacketWriter*, PacketReader*);
     ~MainWindow();
 
     void setEnemyUsername(const QString&);
@@ -26,6 +27,8 @@ public:
     const QString getUsername() const;
 
     void startGame(bool mIsHost);
+
+    void reparentPacketReader(QObject*);
 
 private:
     void connectSignalsToSlots();
@@ -40,6 +43,7 @@ private:
 
     Ui::MainWindow* ui;
     PacketWriter* mPacketWriter;
+    PacketReader* mPacketReader;
     bool mIsPlayClicked;
     QString mEnemyUsername;
 };

@@ -22,7 +22,7 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     mIsHost(isHost),
     mBonusTimer(new QTimer())
 {
-    parent->getPacketWriter()->setParent(this);
+    parent->reparentPacketReader(this);
 
     const QImage background(":/img/img/game_background.png");
     mScene->setBackgroundBrush(QBrush(background));

@@ -5,7 +5,8 @@
 #include "UserInterface/AboutPopup.h"
 #include "UserInterface/ConnectPopup.h"
 #include "UserInterface/WaitPopup.h"
-#include "Network/PacketManager.h"
+#include "Network/PacketWriter.h"
+#include "Network/PacketReader.h"
 #include "Common/Constants.h"
 #include "GameEngine/GameEngine.h"
 
@@ -14,10 +15,11 @@
 
 #include <QDebug>
 
-MainWindow::MainWindow(PacketWriter* packetWriter) :
+MainWindow::MainWindow(PacketWriter* packetWriter, PacketReader* packetReader) :
     QMainWindow(),
     ui(new Ui::MainWindow),
     mPacketWriter(packetWriter),
+    mPacketReader(packetReader),
     mIsPlayClicked(false),
     mEnemyUsername()
 {
@@ -57,6 +59,11 @@ const QString MainWindow::getUsername() const
 void MainWindow::startGame(bool mIsHost)
 {
     auto gameEngine = new GameEngine(this, mIsHost);
+}
+
+void MainWindow::reparentPacketReader(QObject* parent)
+{
+    mPacketReader->setParent(parent);
 }
 
 void MainWindow::connectSignalsToSlots()
