@@ -25,16 +25,16 @@ WaitPopup::WaitPopup(QWidget* parent) :
     ui->mWaitingLabelImage->setMovie(mMovie);
     mMovie->start();
 
-    auto mainWindow = static_cast<MainWindow*>(parent);
-    mainWindow->getPacketWriter()->setParent(this);
-    mainWindow->getPacketReader()->startListening();
+    auto packetReader = static_cast<MainWindow*>(parent)->getPacketReader();
+    packetReader->setParent(this);
+    packetReader->startListening();
 }
 
 WaitPopup::~WaitPopup()
 {
     delete ui;
     delete mMovie;
-    static_cast<MainWindow*>(this->parent())->getPacketWriter()->setParent(nullptr);
+    static_cast<MainWindow*>(this->parent())->reparentPacketReader(nullptr);
 }
 
 void WaitPopup::gotConnectRequest(const QString& enemyUsername)

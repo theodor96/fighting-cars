@@ -48,7 +48,7 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
 ConnectPopup::~ConnectPopup()
 {
     delete ui;
-    static_cast<MainWindow*>(this->parent())->reparentPacketReader(this);
+    static_cast<MainWindow*>(this->parent())->reparentPacketReader(nullptr);
 }
 
 void ConnectPopup::gotReceived()
