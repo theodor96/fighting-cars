@@ -15,6 +15,8 @@ public:
     explicit PacketReader(PacketWriter*);
     virtual ~PacketReader();
 
+    void startListening();
+
 private:
     PacketWriter* mPacketWriter;
     QByteArray mDatagram;

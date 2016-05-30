@@ -51,6 +51,11 @@ PacketWriter* MainWindow::getPacketWriter() const
     return mPacketWriter;
 }
 
+PacketReader* MainWindow::getPacketReader() const
+{
+    return mPacketReader;
+}
+
 const QString MainWindow::getUsername() const
 {
     return ui->mUsernameLineEdit->text();

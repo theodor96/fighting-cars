@@ -24,6 +24,7 @@ public:
     const QString getEnemyUsername() const;
 
     PacketWriter* getPacketWriter() const;
+    PacketReader* getPacketReader() const;
     const QString getUsername() const;
 
     void startGame(bool mIsHost);
