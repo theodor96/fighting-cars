@@ -20,12 +20,7 @@ void PacketManager::setParent(QObject* parent)
     mParent = parent;
 }
 
-const QHostAddress& PacketManager::getPeerAddress() const
+QHostAddress& PacketManager::getPeerAddress()
 {
     return mPeerAddress;
-}
-
-void PacketManager::setPeerAddress(const QHostAddress& peerAddress)
-{
-    mPeerAddress = peerAddress;
 }
