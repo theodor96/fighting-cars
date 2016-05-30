@@ -5,7 +5,8 @@
 
 PacketManager::PacketManager() :
     mSocket(new QUdpSocket()),
-    mPeerAddress()
+    mPeerAddress(),
+    mParent(nullptr)
 {
 
 }

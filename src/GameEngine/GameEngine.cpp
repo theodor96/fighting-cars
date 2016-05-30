@@ -3,6 +3,7 @@
 #include "Common/Constants.h"
 #include "GameEngine/Player.h"
 #include "Network/PacketWriter.h"
+#include "Network/PacketReader.h"
 #include "GameEngine/Bonus.h"
 
 #include <QGraphicsScene>
@@ -23,6 +24,7 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     mBonusTimer(new QTimer())
 {
     parent->reparentPacketReader(this);
+    parent->getPacketReader()->listen();
 
     const QImage background(":/img/img/game_background.png");
     mScene->setBackgroundBrush(QBrush(background));
