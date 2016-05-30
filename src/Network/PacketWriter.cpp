@@ -21,10 +21,8 @@ PacketWriter::~PacketWriter()
 void PacketWriter::sendConnect(const QString& username)
 {
     mDataStream << MESSAGE_TYPE_CONNECTION;
-    //mDataStream << MESSAGE_TYPE_CONNECTION_INITIATE;
-    //mDataStream << username;
-
-    qDebug() << MESSAGE_TYPE_CONNECTION << MESSAGE_TYPE_CONNECTION_INITIATE << username << *mDatagram.data();
+    mDataStream << MESSAGE_TYPE_CONNECTION_INITIATE;
+    mDataStream << username;
     sendPacket();
 }
 
@@ -91,6 +89,7 @@ void PacketWriter::sendSpawnBonus(quint32 type, const QPointF& position)
 void PacketWriter::sendPacket()
 {
     mSocket->writeDatagram(mDatagram, mPeerAddress, PEER_PORT);
+
     //mDatagram.clear();
 
     qDebug() << "wrote a packet to " << mPeerAddress;
