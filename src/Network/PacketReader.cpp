@@ -36,6 +36,11 @@ void PacketReader::startListening()
     mSocket->bind(QHostAddress::Any, PEER_PORT);
 }
 
+void PacketReader::stopListening()
+{
+    mSocket->close();
+}
+
 void PacketReader::receivedDatagram()
 {
     quint8 messageType;
@@ -47,6 +52,8 @@ void PacketReader::receivedDatagram()
         {
             quint8 connectionType;
             mDataStream >> connectionType;
+
+            qDebug() << "conntype = " << connectionType;
 
             switch (connectionType)
             {
@@ -69,6 +76,8 @@ void PacketReader::receivedDatagram()
                 {
                     QString enemyUsername;
                     mDataStream >> enemyUsername;
+
+                    qDebug() << "got accept";
 
                     getParent<ConnectPopup*>()->gotAccept(enemyUsername);
                     break;
