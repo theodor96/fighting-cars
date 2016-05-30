@@ -167,7 +167,12 @@ void Player::keyReleaseEvent(QKeyEvent* event)
        mGameEngine->getParent()->getPacketManager()->sendKeyReleased(static_cast<Qt::Key>(event->key()), pos());
     }
 
-    mPressedKeys.remove(mPressedKeys.indexOf(static_cast<Qt::Key>(event->key())));
+    auto position = mPressedKeys.indexOf(static_cast<Qt::Key>(event->key()));
+    if (position >= 0 && position < mPressedKeys.length())
+    {
+        mPressedKeys.remove(position);
+    }
+
     if(mPressedKeys.isEmpty())
     {
         mMovingTimer->stop();
