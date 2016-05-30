@@ -40,7 +40,6 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
     {
         mainWindow->getPacketWriter()->getPeerAddress() = QHostAddress(ui->mIpLineEdit->text());
         mainWindow->getPacketWriter()->sendConnect(mainWindow->getUsername());
-        mainWindow->getPacketReader()->startListening();
         ui->mStateLabel->setText(STR_RESP_CONNECTING);
         ui->mConnectBtn->setEnabled(false);
         ui->mIpLineEdit->setEnabled(false);
