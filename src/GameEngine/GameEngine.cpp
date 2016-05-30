@@ -70,13 +70,15 @@ MainWindow* GameEngine::getParent() const
 void GameEngine::gotKeyPressed(Qt::Key key)
 {
     auto player = mIsHost ? mPlayerEnemy : mPlayerMe;
-    player->keyPressEvent(&QKeyEvent(QKeyEvent::KeyPress, key, Qt::NoModifier));
+    auto event = QKeyEvent(QKeyEvent::KeyPress, key, Qt::NoModifier);
+    player->keyPressEvent(&event);
 }
 
 void GameEngine::gotKeyReleased(Qt::Key key, const QPointF& peerPosition)
 {
     auto player = mIsHost ? mPlayerEnemy : mPlayerMe;
-    player->keyReleaseEvent(&QKeyEvent(QKeyEvent::KeyRelease, key, Qt::NoModifier));
+    auto event = QKeyEvent(QKeyEvent::KeyRelease, key, Qt::NoModifier);
+    player->keyReleaseEvent(&event);
     player->setPos(peerPosition);
 }
 
