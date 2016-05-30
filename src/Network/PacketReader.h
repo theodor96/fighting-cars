@@ -6,14 +6,17 @@
 
 #include "Network/PacketManager.h"
 
+class PacketWriter;
+
 class PacketReader :
         public PacketManager
 {
 public:
-    PacketReader();
+    explicit PacketReader(PacketWriter*);
     virtual ~PacketReader();
 
 private:
+    PacketWriter* mPacketWriter;
     QByteArray mDatagram;
     QDataStream mDataStream;
 

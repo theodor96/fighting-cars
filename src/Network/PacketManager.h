@@ -15,18 +15,16 @@ public:
     virtual ~PacketManager();
 
     void setParent(QObject*);
-
-    const QHostAddress& getPeerAddress() const;
-    void setPeerAddress(const QHostAddress&);
+    QHostAddress& getPeerAddress();
 
 protected:
     QUdpSocket* mSocket;
     QHostAddress mPeerAddress;
 
-    template<typename Parent>
-    Parent* getParent() const
+    template<typename ParentPtr>
+    ParentPtr getParent() const
     {
-        return static_cast<Parent*>(mParent);
+        return static_cast<ParentPtr>(mParent);
     }
 
 private:
