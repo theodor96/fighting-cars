@@ -94,7 +94,6 @@ void PacketWriter::sendSpawnBonus(quint32 type, const QPointF& position)
 void PacketWriter::sendPacket()
 {
     mSocket->writeDatagram(mDatagram, mPeerAddress, PEER_PORT);
-
     mDatagram.clear();
 
     qDebug() << "wrote a packet to " << mPeerAddress;

@@ -17,6 +17,11 @@ PacketReader::PacketReader(PacketWriter* packetWriter) :
 {
     QObject::connect(mSocket, &QUdpSocket::readyRead, [=]
     {
+        if (mParent == nullptr)
+        {
+            return;
+        }
+
         if (mSocket->hasPendingDatagrams())
         {
             mDatagram.resize(mSocket->pendingDatagramSize());
