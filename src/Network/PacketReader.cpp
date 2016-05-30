@@ -13,7 +13,7 @@ PacketReader::PacketReader(PacketWriter* packetWriter) :
     PacketManager(),
     mPacketWriter(packetWriter),
     mDatagram(),
-    mDataStream(mDatagram)
+    mDataStream(&mDatagram, QIODevice::ReadOnly)
 {
     QObject::connect(mSocket, &QUdpSocket::readyRead, [=]
     {
@@ -38,10 +38,8 @@ void PacketReader::startListening()
 
 void PacketReader::receivedDatagram()
 {
-    quint64 messageType;
+    quint8 messageType;
     mDataStream >> messageType;
-
-    qDebug() << "got packet type " << messageType;
 
     switch (messageType)
     {
