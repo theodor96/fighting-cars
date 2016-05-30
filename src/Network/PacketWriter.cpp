@@ -24,7 +24,7 @@ void PacketWriter::sendConnect(const QString& username)
     //mDataStream << MESSAGE_TYPE_CONNECTION_INITIATE;
     //mDataStream << username;
 
-    qDebug() << MESSAGE_TYPE_CONNECTION << MESSAGE_TYPE_CONNECTION_INITIATE << username << reinterpret_cast<quint8>(mDatagram.data());
+    qDebug() << MESSAGE_TYPE_CONNECTION << MESSAGE_TYPE_CONNECTION_INITIATE << username << *mDatagram.data();
     sendPacket();
 }
 
