@@ -91,5 +91,5 @@ void PacketWriter::sendPacket()
     mSocket->writeDatagram(mDatagram, mPeerAddress, PEER_PORT);
     mDatagram.clear();
 
-    qDebug() << "wrote a packet!";
+    qDebug() << "wrote a packet to " << mPeerAddress;
 }

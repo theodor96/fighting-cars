@@ -17,7 +17,7 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
     ui->setupUi(this);
 
     auto mainWindow = static_cast<MainWindow*>(parent);
-    mainWindow->getPacketWriter()->setParent(this);
+    mainWindow->reparentPacketReader(this);
 
     this->setFixedSize(CONNECT_POPUP_WIDTH, CONNECT_POPUP_WIDTH);
 
@@ -48,7 +48,7 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
 ConnectPopup::~ConnectPopup()
 {
     delete ui;
-    static_cast<MainWindow*>(this->parent())->getPacketWriter()->setParent(nullptr);
+    static_cast<MainWindow*>(this->parent())->reparentPacketReader(this);
 }
 
 void ConnectPopup::gotReceived()
