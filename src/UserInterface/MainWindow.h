@@ -8,7 +8,7 @@ namespace Ui
     class MainWindow;
 }
 
-class PacketManager;
+class PacketWriter;
 
 class MainWindow :
         public QMainWindow
@@ -16,19 +16,20 @@ class MainWindow :
     Q_OBJECT
 
 public:
-    explicit MainWindow(PacketManager*);
+    explicit MainWindow(PacketWriter*);
     ~MainWindow();
 
     void setEnemyUsername(const QString&);
     const QString getEnemyUsername() const;
 
-    PacketManager* getPacketManager() const;
+    PacketWriter* getPacketWriter() const;
     const QString getUsername() const;
 
     void startGame(bool mIsHost);
 
 private:
     void connectSignalsToSlots();
+
     template <typename PopupType>
     void makePopup()
     {
@@ -38,7 +39,7 @@ private:
     }
 
     Ui::MainWindow* ui;
-    PacketManager* mPacketManager;
+    PacketWriter* mPacketWriter;
     bool mIsPlayClicked;
     QString mEnemyUsername;
 };

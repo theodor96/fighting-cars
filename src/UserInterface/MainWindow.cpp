@@ -14,10 +14,10 @@
 
 #include <QDebug>
 
-MainWindow::MainWindow(PacketManager* packetManager) :
+MainWindow::MainWindow(PacketWriter* packetWriter) :
     QMainWindow(),
     ui(new Ui::MainWindow),
-    mPacketManager(packetManager),
+    mPacketWriter(packetWriter),
     mIsPlayClicked(false),
     mEnemyUsername()
 {
@@ -44,9 +44,9 @@ const QString MainWindow::getEnemyUsername() const
     return mEnemyUsername;
 }
 
-PacketManager* MainWindow::getPacketManager() const
+PacketWriter* MainWindow::getPacketWriter() const
 {
-    return mPacketManager;
+    return mPacketWriter;
 }
 
 const QString MainWindow::getUsername() const

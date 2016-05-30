@@ -2,7 +2,7 @@
 #include "GameEngine/Player.h"
 #include "Common/Constants.h"
 #include "UserInterface/MainWindow.h"
-#include "Network/PacketManager.h"
+#include "Network/PacketWriter.h"
 #include "GameEngine/Bullet.h"
 #include "GameEngine/Bonus.h"
 
@@ -86,7 +86,7 @@ void Player::shootBullet()
 
     if (!mIsEnemy)
     {
-       mGameEngine->getParent()->getPacketManager()->sendShootBullet();
+       mGameEngine->getParent()->getPacketWriter()->sendShootBullet();
     }
 
     QPointF position = pos();
@@ -151,7 +151,7 @@ void Player::keyPressEvent(QKeyEvent* event)
 
     if (!mIsEnemy)
     {
-       mGameEngine->getParent()->getPacketManager()->sendKeyPressed(static_cast<Qt::Key>(event->key()));
+       mGameEngine->getParent()->getPacketWriter()->sendKeyPressed(static_cast<Qt::Key>(event->key()));
     }
 
     mPressedKeys.push(mOrientation = static_cast<Qt::Key>(event->key()));
@@ -170,7 +170,7 @@ void Player::keyReleaseEvent(QKeyEvent* event)
 
     if (!mIsEnemy)
     {
-       mGameEngine->getParent()->getPacketManager()->sendKeyReleased(static_cast<Qt::Key>(event->key()), pos());
+       mGameEngine->getParent()->getPacketWriter()->sendKeyReleased(static_cast<Qt::Key>(event->key()), pos());
     }
 
     auto position = mPressedKeys.indexOf(static_cast<Qt::Key>(event->key()));
