@@ -16,6 +16,7 @@ public:
     virtual ~PacketReader();
 
     void startListening();
+    void stopListening();
 
 private:
     PacketWriter* mPacketWriter;
