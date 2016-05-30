@@ -4,6 +4,7 @@
 #include "UserInterface/MainWindow.h"
 #include "Common/Constants.h"
 #include "Network/PacketWriter.h"
+#include "Network/PacketReader.h"
 
 #include <QDebug>
 #include <QRegExp>
@@ -39,6 +40,7 @@ ConnectPopup::ConnectPopup(QWidget* parent) :
     {
         mainWindow->getPacketWriter()->getPeerAddress() = QHostAddress(ui->mIpLineEdit->text());
         mainWindow->getPacketWriter()->sendConnect(mainWindow->getUsername());
+        mainWindow->getPacketReader()->startListening();
         ui->mStateLabel->setText(STR_RESP_CONNECTING);
         ui->mConnectBtn->setEnabled(false);
         ui->mIpLineEdit->setEnabled(false);
