@@ -39,10 +39,6 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
 
     qDebug() << "my = " << mParent->getUsername() << ", his = " << mParent->getEnemyUsername();
 
-    mScene->addItem(mPlayerMe);
-    mScene->addItem(mPlayerEnemy);
-    buildGui();
-
     if (isHost)
     {
         qsrand(QTime::currentTime().msec());
@@ -59,12 +55,18 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
 
         mPlayerMe->setUsername(mParent->getUsername());
         mPlayerEnemy->setUsername(mParent->getEnemyUsername());
+        qDebug() << "names are set";
     }
     else
     {
         mPlayerEnemy->setUsername(mParent->getUsername());
         mPlayerMe->setUsername(mParent->getEnemyUsername());
+        qDebug() << "names are set";
     }
+
+    mScene->addItem(mPlayerMe);
+    mScene->addItem(mPlayerEnemy);
+    buildGui();
 
     countdown();
 }
