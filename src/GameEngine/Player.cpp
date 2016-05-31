@@ -74,6 +74,11 @@ void Player::setUsername(const QString& username)
     mUsername = username;
 }
 
+QString Player::getUsername()
+{
+    return mUsername;
+}
+
 void Player::focusOutEvent(QFocusEvent*)
 {
     if (!mIsEnemy)

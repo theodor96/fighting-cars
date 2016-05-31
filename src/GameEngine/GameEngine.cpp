@@ -117,10 +117,11 @@ void GameEngine::buildGui()
     mCountdownText->setPos(MAIN_WINDOW_WIDTH / 2 - 50, MAIN_WINDOW_HEIGHT / 2 - 150);
     mCountdownText->setScale(20);
 
-    QGraphicsSimpleTextItem* textNameBlue = mScene->addSimpleText("medeseu");
-    textNameBlue->setPos(10, 10);
+    QGraphicsSimpleTextItem* textNameBlue = mScene->addSimpleText(mPlayerMe->getUsername());
+    textNameBlue->setPos(4, 2);
+    textNameBlue->setScale(2);
 
-    for(quint8 i = 0; i < PLAYER_MAX_LIVES; i++)
+    for (quint8 i = 0; i < PLAYER_MAX_LIVES; i++)
     {
         vLivesBlue.push_back(mScene->addPixmap(QPixmap(":/img/img/bonus_1.png")));
         vLivesBlue[i]->setPos(30 * i + 4, 30);
@@ -130,12 +131,14 @@ void GameEngine::buildGui()
         }
     }
 
-    QGraphicsSimpleTextItem* textNameRed = mScene->addSimpleText("medeseu");
-    textNameRed->setPos(MAIN_WINDOW_WIDTH - 100, 10);
-    for(quint8 i = 0; i < PLAYER_MAX_LIVES; i++)
+    QGraphicsSimpleTextItem* textNameRed = mScene->addSimpleText(mPlayerEnemy->getUsername());
+    textNameRed->setPos(4, MAIN_WINDOW_HEIGHT - 55);
+    textNameRed->setScale(2);
+
+    for (quint8 i = 0; i < PLAYER_MAX_LIVES; i++)
     {
         vLivesRed.push_back(mScene->addPixmap(QPixmap(":/img/img/bonus_1.png")));
-        vLivesRed[i]->setPos(MAIN_WINDOW_WIDTH - (30 * (i + 1)), 30);
+        vLivesRed[i]->setPos((30 * i) + 4, MAIN_WINDOW_HEIGHT - 25);
         if (i >= PLAYER_DEFAULT_LIVES)
         {
             vLivesRed[i]->setVisible(false);

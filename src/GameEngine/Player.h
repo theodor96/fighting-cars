@@ -17,6 +17,7 @@ public:
     ~Player();
 
     void setUsername(const QString&);
+    QString getUsername();
 
     void focusOutEvent(QFocusEvent*) override;
 
