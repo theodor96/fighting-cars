@@ -286,6 +286,7 @@ void Player::gotBonus(quint32 type)
             {
                 return;
             }
+
             ++mLives;
             break;
         }
@@ -307,5 +308,10 @@ void Player::gotBonus(quint32 type)
 
 bool Player::isEnemy() const
 {
+    if (mIsRed)
+    {
+        return !mIsEnemy;
+    }
+
     return mIsEnemy;
 }
