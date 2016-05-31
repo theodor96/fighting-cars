@@ -10,6 +10,7 @@ class QGraphicsView;
 class Player;
 class QTimer;
 class QGraphicsPixmapItem;
+class QGraphicsSimpleTextItem;
 
 class GameEngine :
         public QObject
@@ -38,10 +39,12 @@ private:
     Player* mPlayerEnemy;
     bool mIsHost;
     QTimer* mBonusTimer;
+    QGraphicsSimpleTextItem* mCountdownText;
     QVector<QGraphicsPixmapItem*> vLivesBlue;
     QVector<QGraphicsPixmapItem*> vLivesRed;
 
     quint32 getRandomBetween(quint32, quint32) const;
+    void countdown();
 };
 
 #endif // GAMEENGINE_H

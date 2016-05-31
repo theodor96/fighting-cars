@@ -10,8 +10,6 @@ const quint16 WAIT_POPUP_HEIGHT = 200;
 const quint16 CONNECT_POPUP_WIDTH = 200;
 const quint16 CONNECT_POPUP_HEIGHT = 200;
 
-const quint8 GAME_BOARD_PADDING = 20;
-
 const quint8 MESSAGE_TYPE_CONNECTION = 1;
 const quint8 MESSAGE_TYPE_CONNECTION_INITIATE = 1;
 const quint8 MESSAGE_TYPE_CONNECTION_RECEIVED = 2;
@@ -32,8 +30,9 @@ const quint16 PLAYER_BONUS_STEP = 10;
 const quint8 PLAYER_DEFAULT_LIVES = 5;
 const quint8 PLAYER_MAX_LIVES = 8;
 
-const quint32 GAME_BONUS_SPAWN_MIN = 1000;
-const quint32 GAME_BONUS_SPAWN_MAX = 2000;
+
+const quint32 GAME_BONUS_SPAWN_MIN = 3000;
+const quint32 GAME_BONUS_SPAWN_MAX = 10000;
 const quint8 GAME_BONUS_TYPE_FIRST = 1;
 const quint8 GAME_BONUS_TYPE_LIFE = 1;
 const quint8 GAME_BONUS_TYPE_SPEED = 2;
@@ -43,6 +42,8 @@ const quint16 GAME_BONUS_SPEED_TIME = 5000;
 const quint16 GAME_BONUS_DAMAGE_NUMBER= 3;
 const quint8 BULLET_BONUS_POWER = 2;
 const quint16 GAME_UPDATE_TIME = 30;
+const quint8 GAME_COUNTDOWN_TIME = 3;
+const quint8 GAME_BOARD_PADDING = 20;
 
 const quint16 BULLET_STEP = 10;
 const quint32 BULLET_COOLDOWN = 1500;

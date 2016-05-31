@@ -16,12 +16,13 @@
 GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     QObject(parent),
     mParent(parent),
-    mScene(new QGraphicsScene(0, 0, MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT, this)),
+    mScene(new QGraphicsScene(0, 0, MAIN_WINDOW_WIDTH - 20, MAIN_WINDOW_HEIGHT - 20, this)),
     mView(new QGraphicsView(mScene)),
     mPlayerMe(new Player(this, false, isHost)),
     mPlayerEnemy(new Player(this, true, isHost)),
     mIsHost(isHost),
     mBonusTimer(new QTimer()),
+    mCountdownText(nullptr),
     vLivesBlue(),
     vLivesRed()
 {
@@ -48,7 +49,6 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
         qsrand(QTime::currentTime().msec());
         this->connect(mBonusTimer, &QTimer::timeout, this, [=]
         {
-            //qDebug() << "Generated bonus";
             spawnBonus(getRandomBetween(GAME_BONUS_TYPE_FIRST, GAME_BONUS_TYPE_LAST),
                        QPointF(getRandomBetween(PLAYER_ME_START_X, PLAYER_ENEMY_START_X), getRandomBetween(PLAYER_ME_START_Y, PLAYER_ENEMY_START_Y)));
 
@@ -58,6 +58,8 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
 
         mBonusTimer->start(getRandomBetween(GAME_BONUS_SPAWN_MIN, GAME_BONUS_SPAWN_MAX));
     }
+
+    countdown();
 }
 
 GameEngine::~GameEngine()
@@ -111,6 +113,10 @@ quint32 GameEngine::getRandomBetween(quint32 min, quint32 max) const
 
 void GameEngine::buildGui()
 {
+    mCountdownText = mScene->addSimpleText(QString::number(GAME_COUNTDOWN_TIME));
+    mCountdownText->setPos(MAIN_WINDOW_WIDTH / 2 - 50, MAIN_WINDOW_HEIGHT / 2 - 150);
+    mCountdownText->setScale(20);
+
     QGraphicsSimpleTextItem* textNameBlue = mScene->addSimpleText("medeseu");
     textNameBlue->setPos(10, 10);
 
@@ -164,4 +170,27 @@ void GameEngine::updateGui(int nLives, bool isBlue)
             }
         }
     }
+}
+
+void GameEngine::countdown()
+{
+    static quint8 countdown = GAME_COUNTDOWN_TIME;
+    auto countdownTimer = new QTimer();
+    countdownTimer->start(1000);
+
+    QObject::connect(countdownTimer, &QTimer::timeout, [=]
+    {
+        if (--countdown == 0)
+        {
+            countdownTimer->stop();
+            delete mCountdownText;
+            delete countdownTimer;
+
+            mIsHost ? mPlayerMe->setFocus() : mPlayerEnemy->setFocus();
+        }
+        else
+        {
+            mCountdownText->setText(QString::number(countdown));
+        }
+    });
 }

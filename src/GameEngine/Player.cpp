@@ -43,13 +43,11 @@ Player::Player(GameEngine* parent, bool isRed, bool isHost) :
     {
         setPixmap(QPixmap(":/img/img/car_enemy.png"));
         setPos(PLAYER_ENEMY_START_X, PLAYER_ENEMY_START_Y);
-        qDebug() << "enemy plr constructed";
         setRotation(-90);
 
         if (!isHost)
         {
             setFlag(QGraphicsItem::ItemIsFocusable);
-            setFocus();
         }
     }
     else
@@ -61,7 +59,6 @@ Player::Player(GameEngine* parent, bool isRed, bool isHost) :
         if (isHost)
         {
             setFlag(QGraphicsItem::ItemIsFocusable);
-            setFocus();
         }
     }
 }
@@ -119,7 +116,7 @@ void Player::shootBullet()
             break;
     }
 
-    bool isExtra = (mExtraDamageBuletsNumber > 0) ? true : false;//aici e o problema
+    bool isExtra = (mExtraDamageBuletsNumber > 0) ? true : false;
     if (isExtra && mExtraDamageBuletsNumber > 0)
     {
         --mExtraDamageBuletsNumber;
