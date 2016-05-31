@@ -16,7 +16,5 @@ int main(int argc, char** argv)
 
     ui->startGame(true);
 
-
-
     return fightingCars.exec();
 }

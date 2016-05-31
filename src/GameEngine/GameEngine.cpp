@@ -16,7 +16,7 @@
 GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     QObject(parent),
     mParent(parent),
-    mScene(new QGraphicsScene(0, 0, MAIN_WINDOW_WIDTH - 20, MAIN_WINDOW_HEIGHT - 20, this)),
+    mScene(new QGraphicsScene(0, 0, MAIN_WINDOW_WIDTH - 2, MAIN_WINDOW_HEIGHT - 2, this)),
     mView(new QGraphicsView(mScene)),
     mPlayerMe(new Player(this, false, isHost)),
     mPlayerEnemy(new Player(this, true, isHost)),
