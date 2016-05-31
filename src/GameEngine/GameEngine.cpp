@@ -37,8 +37,6 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     mView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     parent->setCentralWidget(mView);
 
-    qDebug() << "my = " << mParent->getUsername() << ", his = " << mParent->getEnemyUsername();
-
     if (isHost)
     {
         qsrand(QTime::currentTime().msec());
@@ -82,6 +80,11 @@ GameEngine::~GameEngine()
 MainWindow* GameEngine::getParent() const
 {
     return mParent;
+}
+
+void GameEngine::playerLost(Player* loser)
+{
+    qDebug() << "player lost" << loser->getUsername();
 }
 
 void GameEngine::gotKeyPressed(Qt::Key key)

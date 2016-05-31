@@ -22,12 +22,11 @@ public:
     ~GameEngine();
 
     MainWindow* getParent() const;
+    void playerLost(Player*);
     void gotKeyPressed(Qt::Key);
     void gotKeyReleased(Qt::Key, const QPointF&);
-
     void gotShootBullet();
     void spawnBonus(quint32, const QPointF&);
-
     void buildGui();
     void updateGui(int, bool);
 

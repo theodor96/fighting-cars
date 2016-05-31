@@ -304,5 +304,7 @@ void Player::gotBonus(quint32 type)
 
 void Player::gotKilled()
 {
-    qDebug() << "i am " << mUsername << " and i got killed";
+    setPixmap(QPixmap(":/img/img/tombstone.png"));
+    setRotation(0);
+    mGameEngine->playerLost(this);
 }
