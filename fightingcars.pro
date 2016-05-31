@@ -24,7 +24,7 @@ TARGET = FightingCars
 #####################
 
 QT += core gui network widgets
-CONFIG += static console
+CONFIG += static
 ########################
 
 RESOURCES +=    resources/Resources.qrc
