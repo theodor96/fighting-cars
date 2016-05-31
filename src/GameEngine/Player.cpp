@@ -269,7 +269,12 @@ void Player::gotShot(bool isExtra)
     {
         mLives -= BULLET_POWER;
     }
-        mLives < 0 ? mLives = 0;
+
+    if (mLives < 0)
+    {
+        mLives = 0;
+    }
+
     mGameEngine->updateGui(mLives, !mIsRed);
     if (mLives <= 0)
     {
