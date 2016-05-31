@@ -37,6 +37,8 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     mView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     parent->setCentralWidget(mView);
 
+    qDebug() << "my = " << mParent->getUsername() << ", his = " << mParent->getEnemyUsername();
+
     mPlayerMe->setUsername(mParent->getUsername());
     mPlayerEnemy->setUsername(mParent->getEnemyUsername());
 

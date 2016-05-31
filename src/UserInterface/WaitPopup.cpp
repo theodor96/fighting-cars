@@ -42,6 +42,7 @@ WaitPopup::~WaitPopup()
 void WaitPopup::gotConnectRequest(const QString& enemyUsername)
 {
     auto mainWindow = static_cast<MainWindow*>(this->parent());
+    mainWindow->setEnemyUsername(enemyUsername);
     mainWindow->getPacketWriter()->sendReceived();
 
     if (QMessageBox::question(this, WINDOW_TITLE, QString(STR_ASK_PLAY) + enemyUsername + "?", QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
