@@ -2,12 +2,14 @@
 #define GAMEENGINE_H
 
 #include <QObject>
+#include <QVector>
 
 class MainWindow;
 class QGraphicsScene;
 class QGraphicsView;
 class Player;
 class QTimer;
+class QGraphicsPixmapItem;
 
 class GameEngine :
         public QObject
@@ -25,6 +27,9 @@ public:
     void gotShootBullet();
     void spawnBonus(quint32, const QPointF&);
 
+    void buildGui();
+    void updateGui(int, bool);
+
 private:
     MainWindow* mParent;
     QGraphicsScene* mScene;
@@ -33,6 +38,8 @@ private:
     Player* mPlayerEnemy;
     bool mIsHost;
     QTimer* mBonusTimer;
+    QVector<QGraphicsPixmapItem*> vLivesBlue;
+    QVector<QGraphicsPixmapItem*> vLivesRed;
 
     quint32 getRandomBetween(quint32, quint32) const;
 };

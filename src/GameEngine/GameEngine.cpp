@@ -21,7 +21,9 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     mPlayerMe(new Player(this, false, isHost)),
     mPlayerEnemy(new Player(this, true, isHost)),
     mIsHost(isHost),
-    mBonusTimer(new QTimer())
+    mBonusTimer(new QTimer()),
+    vLivesBlue(),
+    vLivesRed()
 {
     parent->reparentPacketReader(this);
     parent->getPacketReader()->listen();
@@ -39,6 +41,7 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
 
     mScene->addItem(mPlayerMe);
     mScene->addItem(mPlayerEnemy);
+    buildGui();
 
     if (isHost)
     {
@@ -104,4 +107,61 @@ void GameEngine::spawnBonus(quint32 type, const QPointF& position)
 quint32 GameEngine::getRandomBetween(quint32 min, quint32 max) const
 {
     return qrand() % ((max + 1) - min) + min;
+}
+
+void GameEngine::buildGui()
+{
+    QGraphicsSimpleTextItem* textNameBlue = mScene->addSimpleText("medeseu");
+    textNameBlue->setPos(10, 10);
+
+    for(quint8 i = 0; i < PLAYER_MAX_LIVES; i++)
+    {
+        vLivesBlue.push_back(mScene->addPixmap(QPixmap(":/img/img/bonus_1.png")));
+        vLivesBlue[i]->setPos(30 * i + 4, 30);
+        if (i >= PLAYER_DEFAULT_LIVES)
+        {
+            vLivesBlue[i]->setVisible(false);
+        }
+    }
+
+    QGraphicsSimpleTextItem* textNameRed = mScene->addSimpleText("medeseu");
+    textNameRed->setPos(MAIN_WINDOW_WIDTH - 100, 10);
+    for(quint8 i = 0; i < PLAYER_MAX_LIVES; i++)
+    {
+        vLivesRed.push_back(mScene->addPixmap(QPixmap(":/img/img/bonus_1.png")));
+        vLivesRed[i]->setPos(MAIN_WINDOW_WIDTH - (30 * (i + 1)), 30);
+        if (i >= PLAYER_DEFAULT_LIVES)
+        {
+            vLivesRed[i]->setVisible(false);
+        }
+    }
+}
+
+void GameEngine::updateGui(int nLives, bool isBlue)
+{
+    for (quint8 i = 0; i < PLAYER_MAX_LIVES; i++)
+    {
+        if(isBlue)
+        {
+            if (i >= nLives)
+            {
+                vLivesBlue[i]->setVisible(false);
+            }
+            else
+            {
+                vLivesBlue[i]->setVisible(true);
+            }
+        }
+        else
+        {
+            if (i >= nLives)
+            {
+                vLivesRed[i]->setVisible(false);
+            }
+            else
+            {
+                vLivesRed[i]->setVisible(true);
+            }
+        }
+    }
 }

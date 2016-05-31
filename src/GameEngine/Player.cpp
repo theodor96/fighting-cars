@@ -269,6 +269,8 @@ void Player::gotShot(bool isExtra)
     {
         mLives -= BULLET_POWER;
     }
+        mLives < 0 ? mLives = 0;
+    mGameEngine->updateGui(mLives, !mIsRed);
     if (mLives <= 0)
     {
        qDebug() << "you dead cuz";
@@ -288,6 +290,7 @@ void Player::gotBonus(quint32 type)
             }
 
             ++mLives;
+            mGameEngine->updateGui(mLives, !mIsRed);
             break;
         }
         case GAME_BONUS_TYPE_SPEED:
