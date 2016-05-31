@@ -63,7 +63,7 @@ const QString MainWindow::getUsername() const
 
 void MainWindow::startGame(bool mIsHost)
 {
-    auto gameEngine = new GameEngine(this, mIsHost);
+    new GameEngine(this, mIsHost);
 }
 
 void MainWindow::reparentPacketReader(QObject* parent)
@@ -80,6 +80,7 @@ void MainWindow::connectSignalsToSlots()
             return;
         }
 
+        ui->mUsernameLineEdit->setEnabled(false);
         mIsPlayClicked = true;
         QPropertyAnimation* animation = new QPropertyAnimation(ui->mBtnsContainer, "geometry");
         this->connect(animation, &QPropertyAnimation::finished, this, [=]
@@ -121,7 +122,6 @@ void MainWindow::connectSignalsToSlots()
 
     this->connect(ui->mHostBtn, &QPushButton::clicked, this, [=]
     {
-        qDebug() << "making wait popup";
         makePopup<WaitPopup>();
     });
 }

@@ -6,6 +6,8 @@
 
 #include "Network/PacketManager.h"
 
+class QMutex;
+
 class PacketWriter :
         public PacketManager
 {
@@ -26,6 +28,7 @@ public:
 private:
     QByteArray mDatagram;
     QDataStream mDataStream;
+    QMutex* mMutex;
 
     void sendPacket();
 };

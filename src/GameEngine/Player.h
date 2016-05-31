@@ -44,7 +44,7 @@ private:
 
     bool isEventAllowed(QKeyEvent*);
     void move();
-    ;
+    void gotKilled();
 };
 
 #endif // PLAYER_H

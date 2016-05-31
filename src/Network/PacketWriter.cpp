@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QIODevice>
+#include <QMutex>
 #include <QUdpSocket>
 
 #include "Network/PacketWriter.h"
@@ -8,14 +9,15 @@
 PacketWriter::PacketWriter() :
     PacketManager(),
     mDatagram(),
-    mDataStream(&mDatagram, QIODevice::WriteOnly)
+    mDataStream(&mDatagram, QIODevice::WriteOnly),
+    mMutex(new QMutex())
 {
 
 }
 
 PacketWriter::~PacketWriter()
 {
-
+    delete mMutex;
 }
 
 void PacketWriter::sendConnect(const QString& username)
@@ -93,8 +95,8 @@ void PacketWriter::sendSpawnBonus(quint32 type, const QPointF& position)
 
 void PacketWriter::sendPacket()
 {
+    QMutexLocker lock(mMutex);
+
     mSocket->writeDatagram(mDatagram, mPeerAddress, PEER_PORT);
     mDatagram.clear();
-
-    qDebug() << "wrote a packet to " << mPeerAddress;
 }

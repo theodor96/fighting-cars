@@ -262,27 +262,13 @@ void Player::move()
 
 void Player::gotShot(bool isExtra)
 {
-    qDebug() << "I am " << mIsEnemy << " and i got shot " << (isExtra ? "by an extra damage bullet" : "");
-    if (isExtra)
-    {
-        mLives -= BULLET_BONUS_POWER;
-    }
-    else
-    {
-        mLives -= BULLET_POWER;
-    }
-
-    if (mLives < 0)
-    {
-        mLives = 0;
-    }
-
+    mLives -= isExtra ? BULLET_BONUS_POWER : BULLET_POWER;
     mGameEngine->updateGui(mLives, !mIsRed);
+
     if (mLives <= 0)
     {
-       qDebug() << "you dead cuz";
+        gotKilled();
     }
-
 }
 
 void Player::gotBonus(quint32 type)
@@ -314,4 +300,9 @@ void Player::gotBonus(quint32 type)
             mExtraDamageBuletsNumber = GAME_BONUS_DAMAGE_NUMBER;
         }
     }
+}
+
+void Player::gotKilled()
+{
+    qDebug() << "i am " << mUsername << " and i got killed";
 }
