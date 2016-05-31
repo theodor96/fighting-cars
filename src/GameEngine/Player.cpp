@@ -124,7 +124,7 @@ void Player::shootBullet()
     {
         --mExtraDamageBuletsNumber;
     }
-    Bullet* bullet = new Bullet(mOrientation, position, mIsRed, isExtra);
+    Bullet* bullet = new Bullet(mOrientation, position, mIsRed, isExtra, this);
     scene()->addItem(bullet);
 
     mHasBulletCooldown = true;
@@ -304,14 +304,4 @@ void Player::gotBonus(quint32 type)
             mExtraDamageBuletsNumber = GAME_BONUS_DAMAGE_NUMBER;
         }
     }
-}
-
-bool Player::isEnemy() const
-{
-    if (mIsRed)
-    {
-        return !mIsEnemy;
-    }
-
-    return mIsEnemy;
 }

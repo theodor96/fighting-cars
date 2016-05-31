@@ -6,11 +6,12 @@
 #include "Common/Constants.h"
 #include "GameEngine/Player.h"
 
-Bullet::Bullet(Qt::Key direction, const QPointF& position, bool isEnemyBullet, bool isExtra) :
+Bullet::Bullet(Qt::Key direction, const QPointF& position, bool isEnemyBullet, bool isExtra, Player* owner) :
     QGraphicsPixmapItem(),
     mDirection(direction),
     mTimer(new QTimer()),
-    mIsExtra(isExtra)
+    mIsExtra(isExtra),
+    mOwner(owner)
 {
     setPixmap(QPixmap(QString(":/img/img/bullet%1.png").arg(isExtra? "_extra" : (isEnemyBullet ? "_enemy" : ""))));
     setPos(position);
@@ -37,7 +38,7 @@ void Bullet::move()
     {
         if (Player* plr = dynamic_cast<Player*>(item))
         {
-            if (!plr->isEnemy())
+            if (plr == mOwner)
             {
                 continue;
             }
