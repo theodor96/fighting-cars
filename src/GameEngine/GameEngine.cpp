@@ -85,6 +85,19 @@ MainWindow* GameEngine::getParent() const
 void GameEngine::playerLost(Player* loser)
 {
     qDebug() << "player lost" << loser->getUsername();
+    QGraphicsSimpleTextItem* finalText;
+    if (loser == mPlayerMe &&  mIsHost)
+    {
+        finalText = mScene->addSimpleText("You Lost!");
+    }
+    else
+    {
+        finalText = mScene->addSimpleText("You Won!");
+    }
+
+    finalText->setScale(20);
+    finalText->setPos(MAIN_WINDOW_WIDTH / 2 - 100, MAIN_WINDOW_HEIGHT / 2 - 75);
+
 }
 
 void GameEngine::gotKeyPressed(Qt::Key key)

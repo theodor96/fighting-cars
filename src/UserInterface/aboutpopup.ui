@@ -11,15 +11,15 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>About</string>
   </property>
   <widget class="QLabel" name="mAboutLabel">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>200</width>
-     <height>200</height>
+     <x>25</x>
+     <y>25</y>
+     <width>150</width>
+     <height>150</height>
     </rect>
    </property>
    <property name="text">

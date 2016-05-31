@@ -307,4 +307,5 @@ void Player::gotKilled()
     setPixmap(QPixmap(":/img/img/tombstone.png"));
     setRotation(0);
     mGameEngine->playerLost(this);
+
 }
