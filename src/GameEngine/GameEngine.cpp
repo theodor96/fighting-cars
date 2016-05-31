@@ -99,6 +99,7 @@ void GameEngine::playerLost(Player* loser)
     finalText->setPos(MAIN_WINDOW_WIDTH / 2 - 166, MAIN_WINDOW_HEIGHT / 2 - 75);
 
     QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/img/img/tombstone.png"));
+    tombstone->setPos(loser->pos());
     mScene->addItem(tombstone);
 
     delete mPlayerMe;
