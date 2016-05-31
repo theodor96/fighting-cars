@@ -14,7 +14,7 @@ int main(int argc, char** argv)
     auto ui = new MainWindow(packetWriter, packetReader);
     ui->show();
 
-    //ui->startGame(true);
+    ui->startGame(true);
 
     return fightingCars.exec();
 }
