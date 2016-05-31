@@ -87,7 +87,7 @@ void GameEngine::playerLost(Player* loser)
     mBonusTimer->stop();
 
     QGraphicsSimpleTextItem* finalText;
-    if (loser == mPlayerMe &&  mIsHost)
+    if ((loser == mPlayerMe) == mIsHost)
     {
         finalText = mScene->addSimpleText("You Lost!");
     }
@@ -95,9 +95,8 @@ void GameEngine::playerLost(Player* loser)
     {
         finalText = mScene->addSimpleText("You Won!");
     }
-
-    finalText->setScale(20);
-    finalText->setPos(MAIN_WINDOW_WIDTH / 2 - 100, MAIN_WINDOW_HEIGHT / 2 - 75);
+    finalText->setScale(7);
+    finalText->setPos(MAIN_WINDOW_WIDTH / 2 - 166, MAIN_WINDOW_HEIGHT / 2 - 75);
 
     QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/img/img/tombstone.png"));
     mScene->addItem(tombstone);
