@@ -39,9 +39,6 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
 
     qDebug() << "my = " << mParent->getUsername() << ", his = " << mParent->getEnemyUsername();
 
-    mPlayerMe->setUsername(mParent->getUsername());
-    mPlayerEnemy->setUsername(mParent->getEnemyUsername());
-
     mScene->addItem(mPlayerMe);
     mScene->addItem(mPlayerEnemy);
     buildGui();
@@ -59,6 +56,14 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
         });
 
         mBonusTimer->start(getRandomBetween(GAME_BONUS_SPAWN_MIN, GAME_BONUS_SPAWN_MAX));
+
+        mPlayerMe->setUsername(mParent->getUsername());
+        mPlayerEnemy->setUsername(mParent->getEnemyUsername());
+    }
+    else
+    {
+        mPlayerEnemy->setUsername(mParent->getUsername());
+        mPlayerMe->setUsername(mParent->getEnemyUsername());
     }
 
     countdown();
