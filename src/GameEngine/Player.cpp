@@ -81,9 +81,8 @@ QString Player::getUsername()
 
 void Player::focusOutEvent(QFocusEvent*)
 {
-    if (!mIsEnemy && !mGameEngine->isFinished())
+    if (!mIsEnemy)
     {
-        qDebug() << "setting focus on plr";
         setFocus();
     }
 }
@@ -268,7 +267,7 @@ void Player::gotShot(bool isExtra)
 
     if (mLives <= 0)
     {
-        gotKilled();
+        mGameEngine->playerLost(this);
     }
 }
 
@@ -301,12 +300,4 @@ void Player::gotBonus(quint32 type)
             mExtraDamageBuletsNumber = GAME_BONUS_DAMAGE_NUMBER;
         }
     }
-}
-
-void Player::gotKilled()
-{
-    setPixmap(QPixmap(":/img/img/tombstone.png"));
-    setRotation(0);
-    mGameEngine->playerLost(this);
-
 }

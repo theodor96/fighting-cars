@@ -23,7 +23,6 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     mIsHost(isHost),
     mBonusTimer(new QTimer()),
     mCountdownText(nullptr),
-    mIsFinished(false),
     vLivesBlue(),
     vLivesRed()
 {
@@ -85,8 +84,7 @@ MainWindow* GameEngine::getParent() const
 
 void GameEngine::playerLost(Player* loser)
 {
-    mIsFinished = true;
-    mView->setFocus();
+    mBonusTimer->stop();
 
     QGraphicsSimpleTextItem* finalText;
     if (loser == mPlayerMe &&  mIsHost)
@@ -101,6 +99,13 @@ void GameEngine::playerLost(Player* loser)
     finalText->setScale(20);
     finalText->setPos(MAIN_WINDOW_WIDTH / 2 - 100, MAIN_WINDOW_HEIGHT / 2 - 75);
 
+    QGraphicsPixmapItem* tombstone = new QGraphicsPixmapItem(QPixmap(":/img/img/tombstone.png"));
+    mScene->addItem(tombstone);
+
+    delete mPlayerMe;
+    mPlayerMe = nullptr;
+    delete mPlayerEnemy;
+    mPlayerEnemy = nullptr;
 }
 
 void GameEngine::gotKeyPressed(Qt::Key key)
@@ -224,9 +229,4 @@ void GameEngine::countdown()
             mCountdownText->setText(QString::number(countdown));
         }
     });
-}
-
-bool GameEngine::isFinished() const
-{
-    return mIsFinished;
 }
