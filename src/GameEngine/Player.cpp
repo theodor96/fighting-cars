@@ -81,8 +81,9 @@ QString Player::getUsername()
 
 void Player::focusOutEvent(QFocusEvent*)
 {
-    if (!mIsEnemy)
+    if (!mIsEnemy && !mGameEngine->isFinished())
     {
+        qDebug() << "setting focus on plr";
         setFocus();
     }
 }

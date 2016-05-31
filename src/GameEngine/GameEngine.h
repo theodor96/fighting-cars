@@ -29,6 +29,7 @@ public:
     void spawnBonus(quint32, const QPointF&);
     void buildGui();
     void updateGui(int, bool);
+    bool isFinished() const;
 
 private:
     MainWindow* mParent;
@@ -39,6 +40,7 @@ private:
     bool mIsHost;
     QTimer* mBonusTimer;
     QGraphicsSimpleTextItem* mCountdownText;
+    bool mIsFinished;
     QVector<QGraphicsPixmapItem*> vLivesBlue;
     QVector<QGraphicsPixmapItem*> vLivesRed;
 

@@ -23,6 +23,7 @@ GameEngine::GameEngine(MainWindow* parent, bool isHost) :
     mIsHost(isHost),
     mBonusTimer(new QTimer()),
     mCountdownText(nullptr),
+    mIsFinished(false),
     vLivesBlue(),
     vLivesRed()
 {
@@ -84,7 +85,9 @@ MainWindow* GameEngine::getParent() const
 
 void GameEngine::playerLost(Player* loser)
 {
-    qDebug() << "player lost" << loser->getUsername();
+    mIsFinished = true;
+    mView->setFocus();
+
     QGraphicsSimpleTextItem* finalText;
     if (loser == mPlayerMe &&  mIsHost)
     {
@@ -221,4 +224,9 @@ void GameEngine::countdown()
             mCountdownText->setText(QString::number(countdown));
         }
     });
+}
+
+bool GameEngine::isFinished() const
+{
+    return mIsFinished;
 }
