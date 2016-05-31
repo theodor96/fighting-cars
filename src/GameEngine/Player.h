@@ -38,7 +38,7 @@ private:
     QStack<Qt::Key> mPressedKeys;
     Qt::Key mOrientation;
     bool mHasBulletCooldown;
-    quint8 mLives;
+    qint8 mLives;
     quint8 mExtraDamageBuletsNumber;
 
     bool isEventAllowed(QKeyEvent*);

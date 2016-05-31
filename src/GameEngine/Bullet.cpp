@@ -49,7 +49,10 @@ void Bullet::move()
         }
     }
 
-    if (y() < PLAYER_ME_START_Y || y() > PLAYER_ENEMY_START_Y || x() < PLAYER_ME_START_X || x() > PLAYER_ENEMY_START_X)
+    if (y() < PLAYER_ME_START_Y - GAME_BOARD_PADDING ||
+        y() > PLAYER_ENEMY_START_Y + GAME_BOARD_PADDING||
+        x() < PLAYER_ME_START_X - GAME_BOARD_PADDING ||
+        x() > PLAYER_ENEMY_START_X + GAME_BOARD_PADDING)
     {
         delete this;
         return;
