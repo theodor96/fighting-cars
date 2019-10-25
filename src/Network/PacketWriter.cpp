@@ -2,6 +2,7 @@
 #include <QIODevice>
 #include <QMutex>
 #include <QUdpSocket>
+#include <QPointF>
 
 #include "Network/PacketWriter.h"
 #include "Common/Constants.h"
