@@ -62,4 +62,3 @@ SOURCES +=  src/Common/main.cpp \
             src/GameEngine/Bullet.cpp \
             src/GameEngine/Bonus.cpp \
 ######################################
-s
