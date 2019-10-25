@@ -17,7 +17,7 @@ RC_LANG = ENGLISH
 #################
 
 INCLUDEPATH += $$PWD/src
-#########################
+########################
 
 TEMPLATE = app
 TARGET = FightingCars
@@ -25,14 +25,15 @@ TARGET = FightingCars
 
 QT += core gui network widgets
 CONFIG += static
-########################
+################
 
-RESOURCES +=    resources/Resources.qrc
-FORMS +=    src/UserInterface/MainWindow.ui \
-            src/UserInterface/AboutPopup.ui \
-            src/UserInterface/ConnectPopup.ui \
-            src/UserInterface/WaitPopup.ui \
-####################################
+RESOURCES += resources/Resources.qrc
+
+FORMS +=     src/UserInterface/MainWindow.ui \
+             src/UserInterface/AboutPopup.ui \
+             src/UserInterface/ConnectPopup.ui \
+             src/UserInterface/WaitPopup.ui \
+#############################################
 
 HEADERS +=  src/Common/Constants.h \
             src/UserInterface/MainWindow.h \
@@ -46,6 +47,7 @@ HEADERS +=  src/Common/Constants.h \
             src/GameEngine/Player.h \
             src/GameEngine/Bullet.h \
             src/GameEngine/Bonus.h \
+####################################
 
 SOURCES +=  src/Common/main.cpp \
             src/UserInterface/MainWindow.cpp \
@@ -59,4 +61,5 @@ SOURCES +=  src/Common/main.cpp \
             src/GameEngine/Player.cpp \
             src/GameEngine/Bullet.cpp \
             src/GameEngine/Bonus.cpp \
-###################################################
+######################################
+s
