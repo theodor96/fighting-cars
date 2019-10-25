@@ -1,1 +1,6 @@
 fightingcars.pro.user
+*.o
+moc_*
+ui_*
+qrc_*
+Makefile
